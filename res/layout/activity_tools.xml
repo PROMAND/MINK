@@ -62,7 +62,7 @@
         android:layout_alignLeft="@+id/button6"
         android:layout_alignRight="@+id/button6"
         android:layout_alignTop="@+id/button3"
-        android:drawableLeft="@drawable/curvedline"
+        android:drawableLeft="@drawable/curvedLine"
         android:text="@string/curvedLine" />
 
 </RelativeLayout>
