@@ -128,8 +128,8 @@ public class SettingsActivity extends Activity {
 
         cameraShot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                 CameraShot photo = new CameraShot();
-                 photo.takePhoto();
+                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                 startActivityForResult(intent, 0);
             }
         });
 
