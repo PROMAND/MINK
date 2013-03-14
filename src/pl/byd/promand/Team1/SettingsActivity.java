@@ -10,11 +10,15 @@ package pl.byd.promand.Team1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.app.*;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.promand.Team1.R;
 
 public class SettingsActivity extends Activity {
@@ -71,7 +75,7 @@ public class SettingsActivity extends Activity {
 
                 ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
                 Button save = (Button) dialog.findViewById(R.id.bSave);
-                Button exit = (Button) dialog.findViewById(R.id.bExit);
+                Button exit = (Button) dialog.findViewById(R.id.bCancel);
 
                 exit.setOnClickListener(new View.OnClickListener() {
 
@@ -82,9 +86,8 @@ public class SettingsActivity extends Activity {
 
                 save.setOnClickListener(new View.OnClickListener(){
                     public void onClick(View v) {
-                        //*********************************
-                        //Saving image
-                        //**********************************
+                        Toast.makeText(context, "File is saved", 3000).show();
+                        dialog.dismiss();
                     }
 
                 });

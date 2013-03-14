@@ -20,8 +20,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/colorInHex"
             android:hint="@string/colorHint"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="289dp"
-            android:layout_alignTop="@+id/colourHeader"/>
+            android:layout_alignLeft="@+id/redInNumbers" android:layout_alignTop="@+id/colourHeader"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +52,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignTop="@+id/red"
             android:max="255"
-            android:background="@drawable/red_seek_bar"/>
+            android:background="@drawable/red_seek_bar" android:layout_toRightOf="@+id/redB"/>
     <SeekBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,8 +144,21 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/blackB"
-            android:background="@android:color/black" android:layout_alignRight="@+id/colorInHex"
-            android:layout_alignTop="@+id/whiteB"/>
+            android:background="@android:color/black"
+            android:layout_toRightOf="@+id/seekBarRed" android:layout_alignTop="@+id/whiteB"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/selectB"
+            android:id="@+id/selectB"
+            android:layout_alignLeft="@+id/cancelB" android:layout_alignBottom="@+id/red"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelB"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="440dp"
+            android:layout_alignTop="@+id/green"/>
 
 </RelativeLayout>
 

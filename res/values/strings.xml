@@ -13,4 +13,8 @@
     <string name="blue">Blue</string>
     <string name="colorHint">#</string>
     <string name="zero">0</string>
+    <string name="selectB">Select</string>
+    <string name="cancelB">Cancel</string>
+    <string name="currentPath">Current path:</string>
+    <string name="saveB">Save</string>
 </resources>
