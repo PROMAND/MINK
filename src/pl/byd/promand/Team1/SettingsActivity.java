@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.app.*;
 import android.widget.ListView;
@@ -73,9 +74,16 @@ public class SettingsActivity extends Activity {
                 dialog.setContentView(R.layout.save);
                 dialog.setTitle("Choose the folder");
 
-                ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
+                final ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
                 Button save = (Button) dialog.findViewById(R.id.bSave);
                 Button exit = (Button) dialog.findViewById(R.id.bCancel);
+                String[] values = new String[] {"SD Card folder 1","SD Card folder 2","SD Card folder 3"   };
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (context, R.layout.adapter, R.id.tFolderName, values);
+
+                folderSave.setAdapter(adapter);
+
 
                 exit.setOnClickListener(new View.OnClickListener() {
 
@@ -86,6 +94,7 @@ public class SettingsActivity extends Activity {
 
                 save.setOnClickListener(new View.OnClickListener(){
                     public void onClick(View v) {
+
                         Toast.makeText(context, "File is saved", 3000).show();
                         dialog.dismiss();
                     }
@@ -106,6 +115,13 @@ public class SettingsActivity extends Activity {
                 ListView folderLoad = (ListView) dialog.findViewById(R.id.lFolderLoad);
                 Button load = (Button) dialog.findViewById(R.id.bLoad);
                 Button exit = (Button) dialog.findViewById(R.id.bExit1);
+
+                String[] values = new String[] {"SD Card folder 1","SD Card folder 2","SD Card folder 3"   };
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (context, R.layout.adapter, R.id.tFolderName, values);
+
+                folderLoad.setAdapter(adapter);
 
                 exit.setOnClickListener(new View.OnClickListener() {
 
