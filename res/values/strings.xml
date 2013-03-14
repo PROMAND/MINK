@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Team1</string>
+    <string name="app_name">FunnyPaint</string>
+    <string name="colourHeader">Select a colour</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="colorHint">#</string>
+    <string name="zero">0</string>
 </resources>
