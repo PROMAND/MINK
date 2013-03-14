@@ -16,6 +16,7 @@
          <activity
                 android:name="pl.byd.promand.Team1.SettingsActivity"
                 android:label="Options"
+
                 >
          </activity>
 
@@ -24,5 +25,25 @@
 
         </activity>
 
-     </application>
+        <activity
+                android:name="pl.byd.promand.Team1.ColorChange"
+                android:label="Color" >
+        </activity>
+
+        <activity
+                android:name="pl.byd.promand.Team1.CameraShot"
+                android:label="Camera" >
+        </activity>
+
+        <activity
+                android:name="pl.byd.promand.Team1.Tools"
+                android:label="Tools" >
+        </activity>
+
+        <activity
+                android:name="pl.byd.promand.Team1.WidthMain"
+                android:label="Width" >
+        </activity>
+
+    </application>
 </manifest> 
