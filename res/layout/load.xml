@@ -11,12 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose folder:"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tFolderLoad"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
         android:layout_marginTop="30dp"
-        android:textSize="20dp" android:layout_centerHorizontal="true" android:editable="false"></TextView>
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:editable="false"/>
 
 
     <LinearLayout
@@ -46,10 +45,10 @@
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lFolderLoad" android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
+            android:id="@+id/lFolderLoad"
             android:layout_below="@+id/tFolderLoad"
-            android:background="#ffe0f8" android:longClickable="false"/>
+            android:background="#ffe0f8"
+            />
 
 
 </RelativeLayout>

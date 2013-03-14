@@ -10,12 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose folder:"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tFolderSave"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
         android:layout_marginTop="30dp"
-        android:textSize="20dp" android:layout_centerHorizontal="true"></TextView>
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"/>
 
 
     <LinearLayout
@@ -37,7 +35,9 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:id="@+id/bSave" android:layout_toRightOf="@+id/ePath" android:layout_alignBottom="@+id/bExit"
+                android:id="@+id/bSave"
+                android:layout_toRightOf="@+id/ePath"
+                android:layout_alignBottom="@+id/bExit"
                 />
 
     </LinearLayout>
@@ -45,7 +45,7 @@
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lFolderSave" android:layout_alignParentLeft="false" android:layout_alignParentTop="false"
+            android:id="@+id/lFolderSave"
             android:layout_below="@+id/tFolderSave"
             android:background="#ffe0f8"/>
 
