@@ -37,7 +37,7 @@ public class SettingsActivity extends Activity {
 
               final Dialog dialog = new Dialog(context);
               dialog.setContentView(R.layout.new_image);
-              dialog.setTitle("Choose the folder");
+              dialog.setTitle("");
 
               Button no = (Button) dialog.findViewById(R.id.bNo);
               Button yes = (Button) dialog.findViewById(R.id.bYes);
@@ -125,9 +125,8 @@ public class SettingsActivity extends Activity {
 
         cameraShot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
-
+                 CameraShot photo = new CameraShot();
+                 photo.takePhoto();
             }
         });
 
