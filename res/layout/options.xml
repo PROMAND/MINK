@@ -23,8 +23,7 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:longClickable="false"
-            android:layout_weight="1"
-            android:onClick="saveImage"/>
+            android:layout_weight="1"/>
     <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"

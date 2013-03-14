@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social network 1"
+            android:id="@+id/checkBox"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="23dp" android:layout_alignParentTop="true"
+            android:layout_marginTop="45dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social network 2"
+            android:id="@+id/checkBox1"
+            android:layout_alignLeft="@+id/checkBox" android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social network 3"
+            android:id="@+id/checkBox2"
+            android:layout_alignLeft="@+id/checkBox" android:layout_alignParentTop="true"
+            android:layout_marginTop="152dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social network 4"
+            android:id="@+id/checkBox3"
+            android:layout_alignLeft="@+id/checkBox" android:layout_alignParentTop="true"
+            android:layout_marginTop="206dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox4"
+            android:layout_alignLeft="@+id/checkBox" android:layout_alignParentTop="true"
+            android:layout_marginTop="260dp"
+            android:text="E-mail"/>
+    <EditText
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter email"
+            android:id="@+id/editText"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="118dp"
+            android:layout_alignTop="@+id/checkBox4" android:inputType="textEmailAddress"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:id="@+id/shareB"
+            android:layout_alignRight="@+id/checkBox4" android:layout_alignParentTop="true"
+            android:layout_marginTop="390dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelB2"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="205dp"
+            android:layout_alignTop="@+id/shareB"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:id="@+id/textView" android:layout_alignLeft="@+id/checkBox" android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp" android:textSize="28sp"/>
+</RelativeLayout>

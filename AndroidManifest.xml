@@ -16,9 +16,13 @@
          <activity
                 android:name="pl.byd.promand.Team1.SettingsActivity"
                 android:label="Options"
-
                 >
          </activity>
+
+        <activity android:name="pl.byd.promand.Team1.ShareActivity"
+                android:label="Share">
+
+        </activity>
 
      </application>
 </manifest> 
