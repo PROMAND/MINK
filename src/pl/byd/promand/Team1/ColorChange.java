@@ -8,7 +8,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import com.promand.Team1.R;
 
-public class ColorChange extends Activity {
+public class ColorChange extends MyActivity{
     /**
      * Called when the activity is first created.
      */

@@ -5,7 +5,7 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="7"/>
     <application android:label="@string/app_name">
-        <activity android:name="pl.byd.promand.Team1.ColorChange"
+        <activity android:name="pl.byd.promand.Team1.MyActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -16,12 +16,6 @@
          <activity
                 android:name="pl.byd.promand.Team1.SettingsActivity"
                 android:label="Options"
-
-                >
-         </activity>
-		 <activity
-                android:name="pl.byd.promand.Team1.Workingarea"
-                android:label="Working area"
 
                 >
          </activity>
