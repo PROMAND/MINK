@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+   <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        >
+
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose folder:"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tFolderLoad"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp" android:layout_centerHorizontal="true" android:editable="false"></TextView>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/lFolderLoad"
+        android:layout_marginTop="20dp">
+
+        <Button
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Exit"
+                android:id="@+id/bExit1" android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" android:longClickable="false"/>
+        <Button
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Load"
+                android:id="@+id/bLoad" android:layout_toRightOf="@+id/ePath" android:layout_alignBottom="@+id/bExit1"
+                />
+
+    </LinearLayout>
+
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lFolderLoad" android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/tFolderLoad"
+            android:background="#ffe0f8" android:longClickable="false"/>
+
+
+</RelativeLayout>
