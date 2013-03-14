@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import com.promand.Team1.R;
 
 public class WidthMain extends Activity {
 
@@ -48,7 +49,7 @@ public class WidthMain extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.width_main, menu);
+		getMenuInflater().inflate(R.layout.activity_width_main, menu);
 		return true;
 	}
 	

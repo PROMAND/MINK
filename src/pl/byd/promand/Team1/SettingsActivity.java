@@ -152,9 +152,8 @@ public class SettingsActivity extends Activity {
 
         share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
-
+                Intent i = new Intent(context, ShareActivity.class);
+                startActivity(i);
             }
         });
 
@@ -162,8 +161,6 @@ public class SettingsActivity extends Activity {
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
 
             }
         });
