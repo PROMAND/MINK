@@ -9,5 +9,6 @@
             android:layout_width="fill_parent"
             android:layout_height="30dp"
             android:text="    FolderName"
-            android:id="@+id/tFolderName" android:layout_gravity="center" android:gravity="center_vertical"/>
+            android:id="@+id/tFolderName" android:layout_gravity="center" android:gravity="center_vertical"
+            android:textColor="#010101"/>
 </LinearLayout>
