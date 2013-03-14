@@ -39,17 +39,17 @@ public class CameraShot extends Activity {
             bit = (Bitmap)ex.get("data");
 
 
-            Matrix matrix = new Matrix();
-            matrix.postRotate(90);
+            //Matrix matrix = new Matrix();
+           // matrix.postRotate(90);
 
-            bitmap = Bitmap.createBitmap(bit, 0, 0,bit.getWidth(),bit.getHeight(),matrix,true);
+           // bitmap = Bitmap.createBitmap(bit, 0, 0,bit.getWidth(),bit.getHeight(),matrix,true);
 
 
             // ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             // bit2.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-            Context context = getApplicationContext();
-            context.getContentResolver().delete(data.getData(), null, null);
+            //Context context = getApplicationContext();
+            //context.getContentResolver().delete(data.getData(), null, null);
         }
     }
 
