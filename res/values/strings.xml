@@ -17,4 +17,14 @@
     <string name="cancelB">Cancel</string>
     <string name="currentPath">Current path:</string>
     <string name="saveB">Save</string>
+
+    <string name="width">Width</string>
+    <string name="widthNumbers">1&#8211;10</string>
+
+    <string name="brush">Brush</string>
+    <string name="circle">Circle</string>
+    <string name="eraser">Eraser</string>
+    <string name="fill">Filler</string>
+    <string name="line">Line</string>
+    <string name="curvedLine">Curved Line</string>
 </resources>
