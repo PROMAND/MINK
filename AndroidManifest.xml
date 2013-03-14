@@ -12,5 +12,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
+
+         <activity
+                android:name="pl.byd.promand.Team1.SettingsActivity"
+                android:label="Options"
+
+                >
+         </activity>
+
+     </application>
 </manifest> 
