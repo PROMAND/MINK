@@ -3,6 +3,7 @@ package pl.byd.promand.Team1;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import com.promand.Team1.R;
 
 public class Tools extends Activity {
 
@@ -15,7 +16,7 @@ public class Tools extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.tools, menu);
+		getMenuInflater().inflate(R.layout.activity_tools, menu);
 		return true;
 	}
 
