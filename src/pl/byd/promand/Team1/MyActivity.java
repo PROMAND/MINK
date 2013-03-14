@@ -15,6 +15,7 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
         Button button4 = (Button) findViewById(R.id.button4);
 
         button4.setOnClickListener(new View.OnClickListener() {
@@ -22,8 +23,6 @@ public class MyActivity extends Activity {
 
                 Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
-
-            }
-        });
+            }});
     }
 }

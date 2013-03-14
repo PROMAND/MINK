@@ -27,14 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tNewImage2"
-            android:layout_centerHorizontal="true" android:layout_marginTop="30dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
 
     <Button android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="No"
             android:id="@+id/bNo"
-            android:layout_alignTop="@+id/bYes"
-            android:layout_toRightOf="@id/bYes" />
+            />
 
     <Button
             android:layout_width="100dp"
