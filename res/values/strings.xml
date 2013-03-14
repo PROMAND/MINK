@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Team1</string>
+    <string name="dButton1">Tools</string>
+    <string name="dButton2">Width</string>
+    <string name="dButton3">Color</string>
+    <string name="dButton4">Options</string>
+
 </resources>
