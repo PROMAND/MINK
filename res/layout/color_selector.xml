@@ -151,14 +151,8 @@
             android:layout_height="wrap_content"
             android:text="@string/selectB"
             android:id="@+id/selectB"
-            android:layout_alignLeft="@+id/cancelB" android:layout_alignBottom="@+id/red"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/cancelB"
             android:layout_alignParentLeft="true" android:layout_marginLeft="440dp"
-            android:layout_alignTop="@+id/green"/>
+            android:layout_alignBottom="@+id/red"/>
 
 </RelativeLayout>
 

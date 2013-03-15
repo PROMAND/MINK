@@ -1,10 +1,14 @@
 package pl.byd.promand.Team1;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.Surface;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import com.promand.Team1.R;
@@ -43,7 +47,7 @@ public class MyActivity extends Activity {
         colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(context, ColorChange.class);
-                startActivity(i);
+                startActivityForResult(i, 1);
             }
         });
 
@@ -55,8 +59,13 @@ public class MyActivity extends Activity {
             }
         });
 
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1) {
+            SurfaceView view = (SurfaceView) findViewById(R.id.surfaceView1);
+            view.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
+        }
+    }
 }
