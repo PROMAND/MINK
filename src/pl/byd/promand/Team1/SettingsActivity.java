@@ -3,64 +3,71 @@ package pl.byd.promand.Team1;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Environment;
+import android.view.SurfaceView;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.app.*;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import com.promand.Team1.R;
 
+import java.io.File;
+import java.util.ArrayList;
+
+
 public class SettingsActivity extends Activity {
+
+    public Bitmap bitmap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options);
 
-      Button newImage = (Button) findViewById(R.id.bNewImage);
-      Button saveImage = (Button) findViewById(R.id.bSaveImage);
-      Button loadImage = (Button) findViewById(R.id.bLoadImage);
-      Button cameraShot = (Button) findViewById(R.id.bCameraShot);
-      Button share = (Button) findViewById(R.id.bShare);
-      Button back = (Button) findViewById(R.id.bBack);
-      final Context context = this;
+        Button newImage = (Button) findViewById(R.id.bNewImage);
+        Button saveImage = (Button) findViewById(R.id.bSaveImage);
+        Button loadImage = (Button) findViewById(R.id.bLoadImage);
+        Button cameraShot = (Button) findViewById(R.id.bCameraShot);
+        Button share = (Button) findViewById(R.id.bShare);
+        Button back = (Button) findViewById(R.id.bBack);
 
-      newImage.setOnClickListener(new View.OnClickListener() {
-          public void onClick(View v) {
-
-              final Dialog dialog = new Dialog(context);
-              dialog.setContentView(R.layout.new_image);
-              dialog.setTitle("An image is opened");
-
-              Button no = (Button) dialog.findViewById(R.id.bNo);
-              Button yes = (Button) dialog.findViewById(R.id.bYes);
-
-              no.setOnClickListener(new View.OnClickListener() {
-
-                  public void onClick(View v) {
-                      dialog.dismiss();
-                  }
-              });
-
-              yes.setOnClickListener(new View.OnClickListener(){
-                  public void onClick(View v) {
-                      //*********************************
-                      //New image
-                      //**********************************
-                  }
-
-              });
-              dialog.show();
-          }
-      });
+        final Context context = this;
 
 
-      saveImage.setOnClickListener(new View.OnClickListener() {
+        newImage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.new_image);
+                dialog.setTitle("An image is opened");
+
+                Button no = (Button) dialog.findViewById(R.id.bNo);
+                Button yes = (Button) dialog.findViewById(R.id.bYes);
+
+                no.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                yes.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        //*********************************
+                        //New image
+                        //**********************************
+                    }
+
+                });
+                dialog.show();
+            }
+        });
+
+
+        saveImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 final Dialog dialog = new Dialog(context);
@@ -70,12 +77,28 @@ public class SettingsActivity extends Activity {
                 final ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
                 Button save = (Button) dialog.findViewById(R.id.bSave);
                 Button exit = (Button) dialog.findViewById(R.id.bCancel);
-                String[] values = new String[] {"SD Card folder 1","SD Card folder 2","SD Card folder 3"   };
 
+                final Folders folder = new Folders();
+                folder.setCurrentPath(Environment.getExternalStorageDirectory());
+
+               final ArrayList<String> values = new ArrayList<String>(folder.getListOfFolders());
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>
                         (context, R.layout.adapter, R.id.tFolderName, values);
 
                 folderSave.setAdapter(adapter);
+
+                folderSave.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                      String s = values.get(position);
+
+                 Toast.makeText(SettingsActivity.this, "Folder: "+s, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
 
 
                 exit.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +108,7 @@ public class SettingsActivity extends Activity {
                     }
                 });
 
-                save.setOnClickListener(new View.OnClickListener(){
+                save.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
 
                         Toast.makeText(context, "File is saved", 3000).show();
@@ -93,7 +116,7 @@ public class SettingsActivity extends Activity {
                     }
 
                 });
-            dialog.show();
+                dialog.show();
             }
         });
 
@@ -105,16 +128,34 @@ public class SettingsActivity extends Activity {
                 dialog.setContentView(R.layout.load);
                 dialog.setTitle("Choose the folder");
 
-                ListView folderLoad = (ListView) dialog.findViewById(R.id.lFolderLoad);
+                final ListView folderLoad = (ListView) dialog.findViewById(R.id.lFolderLoad);
+                folderLoad.setClickable(true);
+
                 Button load = (Button) dialog.findViewById(R.id.bLoad);
                 Button exit = (Button) dialog.findViewById(R.id.bExit1);
 
-                String[] values = new String[] {"SD Card folder 1","SD Card folder 2","SD Card folder 3"   };
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                final Folders folder = new Folders();
+                folder.setCurrentPath(Environment.getExternalStorageDirectory());
+
+               final ArrayList<String> values = new ArrayList<String>(folder.getListOfFolders());
+
+                 ArrayAdapter<String> adapter = new ArrayAdapter<String>
                         (context, R.layout.adapter, R.id.tFolderName, values);
 
                 folderLoad.setAdapter(adapter);
+
+                folderLoad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                    String s = values.get(position);
+                    Toast.makeText(SettingsActivity.this, "Folder: "+s, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
 
                 exit.setOnClickListener(new View.OnClickListener() {
 
@@ -123,7 +164,7 @@ public class SettingsActivity extends Activity {
                     }
                 });
 
-                load.setOnClickListener(new View.OnClickListener(){
+                load.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         //*********************************
                         //loading image
@@ -131,15 +172,16 @@ public class SettingsActivity extends Activity {
                     }
 
                 });
-            dialog.show();
+
+                dialog.show();
             }
         });
 
         cameraShot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                 startActivityForResult(intent, 0);
-            }
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, 0);
+               }
         });
 
 
@@ -151,7 +193,6 @@ public class SettingsActivity extends Activity {
         });
 
 
-
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -159,7 +200,32 @@ public class SettingsActivity extends Activity {
         });
 
 
-
-
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK)
+        {
+            Bundle ex = data.getExtras();
+            bitmap = (Bitmap)ex.get("data");
+
+            /*
+            SurfaceView photoView = (SurfaceView)findViewById(R.id.surfaceView1);
+            Drawable drawableImage = new BitmapDrawable(getResources(),bitmap);
+            photoView.setBackgroundDrawable(drawableImage);  */
+
+            Context context = getApplicationContext();
+            context.getContentResolver().delete(data.getData(), null, null);
+        }
+    }
+
+
+
+
+
+
+
 }
