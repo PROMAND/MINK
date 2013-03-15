@@ -9,13 +9,6 @@ import android.app.Activity;
 //import android.content.Intent;
 //import java.io.ByteArrayOutputStream;
 
- /**
- * Created with IntelliJ IDEA.
- * User: Kasia
- * Date: 14.03.13
- * Time: 15:44
- * To change this template use File | Settings | File Templates.
- */
 public class CameraShot extends Activity {
 
     Intent i;

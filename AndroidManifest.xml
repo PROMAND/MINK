@@ -15,9 +15,12 @@
 
          <activity
                 android:name="pl.byd.promand.Team1.SettingsActivity"
-                android:label="Options"
+                android:label="Options"  >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
 
-                >
+        </intent-filter>
+
          </activity>
 
         <activity android:name="pl.byd.promand.Team1.ShareActivity"

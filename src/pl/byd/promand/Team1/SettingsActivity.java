@@ -1,14 +1,7 @@
 package pl.byd.promand.Team1;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Kasia
- * Date: 14.03.13
- * Time: 13:34
- * To change this template use File | Settings | File Templates.
- */
-
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,7 +35,7 @@ public class SettingsActivity extends Activity {
 
               final Dialog dialog = new Dialog(context);
               dialog.setContentView(R.layout.new_image);
-              dialog.setTitle("");
+              dialog.setTitle("An image is opened");
 
               Button no = (Button) dialog.findViewById(R.id.bNo);
               Button yes = (Button) dialog.findViewById(R.id.bYes);

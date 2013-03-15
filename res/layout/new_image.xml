@@ -11,17 +11,8 @@
               android:textStyle="bold"
               android:phoneNumber="false"
               android:layout_alignParentLeft="false"
-              android:layout_alignTop="@+id/tNewImage1"
-              android:layout_marginTop="30dp"
+              android:layout_marginTop="5dp"
               android:layout_centerHorizontal="true" android:textSize="18dp"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="The image is opened."
-            android:id="@+id/tNewImage1" android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp" android:textStyle="bold" android:layout_alignParentLeft="false"
-            android:phoneNumber="false" android:layout_centerHorizontal="true" android:textSize="18dp"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
