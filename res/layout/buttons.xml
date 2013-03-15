@@ -11,7 +11,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/dButton1" />
+        android:drawableRight="@drawable/fill"
+        android:text="@string/dButton1"/>
+     <!--
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="100px"
+        android:layout_height="100px"/>   -->
 
     <Button
         android:id="@+id/button2"
