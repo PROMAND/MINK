@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">FunnyPaint</string>
-    <string name="dButton1">Tools</string>
+    <string name="dButton1">Tool</string>
     <string name="dButton2">Width</string>
     <string name="dButton3">Color</string>
     <string name="dButton4">Options</string>
@@ -27,4 +27,5 @@
     <string name="fill">Filler</string>
     <string name="line">Line</string>
     <string name="curvedLine">Curved Line</string>
+    <string name="Logo">Logo</string>
 </resources>
