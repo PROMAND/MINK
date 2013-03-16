@@ -27,7 +27,9 @@ public class MyActivity extends Activity {
 
         Button tools = (Button) findViewById(R.id.button1);
         Button width = (Button) findViewById(R.id.button2);
+        width.setText(width.getText() + " " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
+        colors.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         Button settings = (Button) findViewById(R.id.button4);
 
         tools.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +42,7 @@ public class MyActivity extends Activity {
         width.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(context, WidthMain.class);
-                startActivity(i);
+                startActivityForResult(i, 2);
             }
         });
 
@@ -66,6 +68,13 @@ public class MyActivity extends Activity {
         if (resultCode == 1) {
             SurfaceView view = (SurfaceView) findViewById(R.id.surfaceView1);
             view.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
+            Button colorB = (Button) findViewById(R.id.button3);
+            colorB.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
+        }
+
+        if (resultCode == 2) {
+            Button widthB = (Button) findViewById(R.id.button2);
+            widthB.setText("Width: " + ModelRoot.getRoot().getWidth());
         }
     }
 }
