@@ -212,7 +212,10 @@ public class SettingsActivity extends Activity {
             Bundle ex = data.getExtras();
             bitmap = (Bitmap)ex.get("data");
 
-            //SettingsActivity.this.finish();
+            ModelRoot.getRoot().setBitmap(bitmap);
+            setResult(3, getIntent());
+            SettingsActivity.this.finish();
+
             Context context = getApplicationContext();
             context.getContentResolver().delete(data.getData(), null, null);
         }

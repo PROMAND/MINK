@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 
 /**
@@ -12,6 +13,7 @@ import android.graphics.Color;
 public class ModelRoot {
     private String color = "#FFFFFF";
     private String width = "1";
+    private Bitmap bitmap;
 
     private final static ModelRoot root = new ModelRoot();
     public static ModelRoot getRoot() {
@@ -32,6 +34,14 @@ public class ModelRoot {
 
     public void setWidth(String width) {
         this.width = width;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }
 
