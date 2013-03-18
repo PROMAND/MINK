@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.Surface;
-import android.view.SurfaceView;
-import android.view.View;
+import android.view.*;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import com.promand.Team1.R;
 
 public class MyActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-                               //
-      Context context = this;
+    SurfaceView view;
+    Context context = this;
+    LinearLayout surfaceViewLayout;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class MyActivity extends Activity {
         Button width = (Button) findViewById(R.id.button2);
         Button colors = (Button) findViewById(R.id.button3);
         Button settings = (Button) findViewById(R.id.button4);
+        view = (SurfaceView) findViewById(R.id.surfaceView1);
+        surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
 
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -59,6 +62,10 @@ public class MyActivity extends Activity {
             }
         });
 
+
+       surfaceViewLayout.addView(new SurfaceViewDraw(this));
+
+
     }
 
     @Override
@@ -68,4 +75,7 @@ public class MyActivity extends Activity {
             view.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         }
     }
-}
+
+
+
+    }

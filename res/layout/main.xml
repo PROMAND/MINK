@@ -1,25 +1,95 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Main" >
-    <include
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/upbuttons" >
-    </include>
-    <SurfaceView
-            android:id="@+id/surfaceView1"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/white" />
 
-    <include
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/buttons" >
-    </include>
+    <!--Top buttons-->
+    <LinearLayout android:id="@+id/TopLayout"
+            android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:weightSum="4" android:layout_alignParentTop="true"
+            >
+        <Button
+                android:id="@+id/upbutton1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Logo" />
 
-</LinearLayout>
+        <ImageButton
+                android:id="@+id/upbutton2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/add_new" />
+        <ImageButton
+                android:id="@+id/upbutton3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/save_icon" />
+
+
+        <ImageButton
+                android:id="@+id/upbutton4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/share"/>
+
+    </LinearLayout>
+
+    <!--LinearLayout holding SurfaceView-->
+    <LinearLayout
+            android:id="@+id/SurfaceViewLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp" android:layout_marginTop="10dp" android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" android:layout_below="@+id/TopLayout"
+            android:layout_above="@+id/BottomLayout"/>
+
+
+    <!--Bottom buttons-->
+    <LinearLayout android:id="@+id/BottomLayout"
+            android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:weightSum="4" android:layout_alignParentBottom="true"
+            >
+
+        <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/fill"
+                android:text="@string/dButton1"/>
+
+        <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dButton2" />
+
+        <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dButton3" />
+
+        <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dButton4" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class SettingsActivity extends Activity {
 
-    public Bitmap bitmap;
+    public static Bitmap bitmap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -212,10 +212,7 @@ public class SettingsActivity extends Activity {
             Bundle ex = data.getExtras();
             bitmap = (Bitmap)ex.get("data");
 
-            /*
-            SurfaceView photoView = (SurfaceView)findViewById(R.id.surfaceView1);
-            Drawable drawableImage = new BitmapDrawable(getResources(),bitmap);
-            photoView.setBackgroundDrawable(drawableImage);  */
+            SettingsActivity.this.finish();
 
             Context context = getApplicationContext();
             context.getContentResolver().delete(data.getData(), null, null);
