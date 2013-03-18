@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.*;
@@ -16,12 +14,17 @@ import com.promand.Team1.R;
 
 import java.util.ArrayList;
 
-public class MyActivity extends Activity implements View.OnTouchListener {
+public class MyActivity extends Activity implements View.OnTouchListener{
 
-    SurfaceViewDraw view;
+   SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
     float x, y;
+
+    ArrayList<Path> pointsToDraw = new ArrayList<Path>();
+    Paint mPaint;
+    Path path;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,23 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         x=0;
         y=0;
 
+
         //drawing surface class
-      view = new SurfaceViewDraw(this);
-      surfaceViewLayout.addView(view);
-       view.setOnTouchListener(this);
+        view = new SurfaceViewDraw(context);
+
+        surfaceViewLayout.addView(view);
+        view.setOnTouchListener(this);
+
+        mPaint = new Paint();
+      //  mPaint.setDither(true);
+        mPaint.setColor(Color.GREEN);
+      /*  mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeJoin(Paint.Join.ROUND);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setStrokeWidth(30);      */
+
+
+
 
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -168,7 +184,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
     }
 
-    @Override
+  @Override
     protected void onResume() {
         super.onResume();
         view.resume();
@@ -198,8 +214,8 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
         if (resultCode == 3) {
             Bitmap tempBitmap = ModelRoot.getRoot().getBitmap();
-         //  SurfaceView photoSurface = new SurfaceViewDraw(context, tempBitmap);
-         //   surfaceViewLayout.addView(photoSurface);
+          // SurfaceView photoSurface = new SurfaceViewDraw(context, tempBitmap);
+         //  surfaceViewLayout.addView(photoSurface);
 
         }
 
@@ -207,11 +223,12 @@ public class MyActivity extends Activity implements View.OnTouchListener {
     }
 
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-      x = motionEvent.getX();
-      y = motionEvent.getY();
-        return false;
+   @Override
+    public boolean onTouch(View view, MotionEvent me) {
+
+       x = me.getX();
+       y = me.getY();
+       return true;
     }
 
 
@@ -223,11 +240,12 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         boolean isRunning = false;
         Bitmap photoBitmap;
 
+
         // constructor no. 1 - empty surface
         public SurfaceViewDraw(Context context){
             super(context);
             surfHolder = getHolder();
-
+            //setBackgroundColor(Color.rgb(250,255,240));
         }
 
         // constructor no. 2 - surface with photo
@@ -235,6 +253,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             super(context);
             surfHolder = getHolder();
             photoBitmap = Bitmap.createBitmap(bitmap) ;
+            //setBackgroundDrawable(new BitmapDrawable(photoBitmap));
 
         }
 
@@ -248,15 +267,13 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
                 Canvas canvas = surfHolder.lockCanvas();
                 if (photoBitmap==null)
-                    {
-                        if(x!=0 && y!=0)
-                        {
-                        canvas.drawRGB(255,250,240);
-                        canvas.drawCircle(x,y,60,new Paint());
-                        }
-                    }
+                {
+                     if (x!=0 && y!=0)
+                       canvas.drawCircle(x, y, 50, mPaint);
 
-                else canvas.setBitmap(photoBitmap);
+                }
+
+                //else canvas.setBitmap(photoBitmap);
 
 
                 surfHolder.unlockCanvasAndPost(canvas);
@@ -286,10 +303,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
         }
 
-
     }
-
-
 
 
 
