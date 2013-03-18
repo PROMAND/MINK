@@ -13,10 +13,8 @@ import android.widget.LinearLayout;
 import com.promand.Team1.R;
 
 public class MyActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
-    SurfaceView view;
+
+    SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
 
@@ -32,7 +30,7 @@ public class MyActivity extends Activity {
         Button colors = (Button) findViewById(R.id.button3);
         colors.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         Button settings = (Button) findViewById(R.id.button4);
-        view = (SurfaceView) findViewById(R.id.surfaceView1);
+        //view = (SurfaceView) findViewById(R.id.surfaceView1);
         surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
 
         tools.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +63,23 @@ public class MyActivity extends Activity {
         });
 
        //drawing class
-       surfaceViewLayout.addView(new SurfaceViewDraw(this));
+        view = new SurfaceViewDraw(this);
+        surfaceViewLayout.addView(view);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        view.resume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        view.pause();
     }
 
     @Override
