@@ -1,15 +1,17 @@
 package pl.byd.promand.Team1;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Surface;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.*;
 import com.promand.Team1.R;
 
-public class ColorChange extends MyActivity{
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ColorChange extends MyActivity {
     /**
      * Called when the activity is first created.
      */
@@ -39,6 +41,7 @@ public class ColorChange extends MyActivity{
                 EditText hexField = (EditText) findViewById(R.id.colorInHex);
                 hexField.setBackgroundColor(Color.parseColor("#" + hexCode));
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
@@ -105,13 +108,89 @@ public class ColorChange extends MyActivity{
         selectColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText hexColor = (EditText) findViewById(R.id.colorInHex);
                 String color = hexColor.getText().toString();
-                ModelRoot.getRoot().setColor(color);
-                Toast.makeText(ColorChange.this, "Color selected", 5000).show();
-                setResult(1, getIntent());
+                if (color.length() > 5 && color.length() < 8) {
+                    Pattern p = Pattern.compile("[0-9a-fA-F]{6}");
+                    Matcher m = p.matcher(color);
+                    if (m.find() && m.group().length() == 6) {
+                        if (color.length() == 6) {
+                            color = "#" + color;
+                        }
+                        ModelRoot.getRoot().setColor(color);
+                        Toast.makeText(ColorChange.this, "Color selected", 5000).show();
+                        setResult(1, getIntent());
+                        finish();
+                    } else {
+                        final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChange.this);
+                        alert.setTitle("Error!");
+                        alert.setMessage("Please enter a valid hexadecimal color representation");
+                        alert.setCancelable(true);
+                        alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        alert.show();
+                    }
+                } else {
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChange.this);
+                    alert.setTitle("Error!");
+                    alert.setMessage("Please enter a valid hexadecimal color representation");
+                    alert.setCancelable(true);
+                    alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alert.show();
+                }
             }
         });
 
+
+        final EditText hexField = (EditText) findViewById(R.id.colorInHex);
+        hexField.clearFocus();
+
+        hexField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("");
+            }
+        });
+
+        hexField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String color = hexField.getText().toString();
+                hexField.setText("#" + hexField.getText().toString());
+                if (color.length() == 6) {
+                    Pattern p = Pattern.compile("[0-9a-fA-F]+");
+                    Matcher m = p.matcher(color);
+                    if (m.find() && m.group().length() == 6) {
+
+                        String colorPart = m.group();
+                        String red = colorPart.substring(0, 1);
+                        String green = colorPart.substring(2, 3);
+                        String blue = colorPart.substring(4, 5);
+
+                        redSeek.setProgress(Integer.parseInt(red, 16));
+                        greenSeek.setProgress(Integer.parseInt(green, 16));
+                        blueSeek.setProgress(Integer.parseInt(blue, 16));
+
+                        ModelRoot.getRoot().setColor(color);
+                        setResult(1, getIntent());
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final EditText hexField = (EditText) findViewById(R.id.colorInHex);
+        hexField.clearFocus();
     }
 }

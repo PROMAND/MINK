@@ -10,7 +10,7 @@ import android.graphics.Color;
  * To change this template use File | Settings | File Templates.
  */
 public class ModelRoot {
-    private String color = "#000000";
+    private String color = "#FFFFFF";
     private String width = "1";
 
     private final static ModelRoot root = new ModelRoot();

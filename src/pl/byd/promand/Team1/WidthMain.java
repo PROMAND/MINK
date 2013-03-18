@@ -40,9 +40,7 @@ public class WidthMain extends Activity {
 
                 txtNumbers.setText(String.valueOf(arg1));
                 ModelRoot.getRoot().setWidth(String.valueOf(arg1));
-				/* mProgressText.setText(progress + " " + 
-                "from touch" + "=" + fromTouch); */
-
+				setResult(2, getIntent());
             }
         });
     }
