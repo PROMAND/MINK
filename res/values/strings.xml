@@ -28,4 +28,7 @@
     <string name="line">Line</string>
     <string name="curvedLine">Curved Line</string>
     <string name="Logo">Logo</string>
+    <string name="text">Text</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="pen">Pen</string>
 </resources>
