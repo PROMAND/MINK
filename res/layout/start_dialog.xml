@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/startLayout">
+
+    <ImageButton
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/newButton"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/new_file" android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" android:layout_marginTop="45dp"/>
+    <ImageButton
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/loadButton"
+            android:layout_gravity="left|center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="90dp"
+            android:layout_alignTop="@+id/newButton" android:src="@drawable/open_file"/>
+    <ImageButton
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/takeAPhotoButton"
+            android:layout_gravity="left|center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="187dp"
+            android:layout_alignTop="@+id/newButton" android:src="@drawable/take_a_photo"/>
+    <TextView
+            android:layout_width="6dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" android:layout_toRightOf="@+id/takeAPhotoButton"
+            android:layout_alignParentTop="true" android:layout_marginTop="11dp"/>
+    <ImageView
+            android:layout_width="80dp"
+            android:layout_height="88dp"
+            android:id="@+id/logo" android:layout_alignLeft="@+id/newButton" android:layout_alignParentTop="true"
+            android:src="@drawable/logopic1" android:layout_above="@+id/newButton"
+            android:layout_alignBottom="@+id/textView"/>
+
+
+</RelativeLayout>

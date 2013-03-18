@@ -14,26 +14,26 @@ public class SurfaceViewDraw extends SurfaceView implements Runnable {
     boolean isRunning = true;
 
 
-    public SurfaceViewDraw(Context context){
+    public SurfaceViewDraw(Context context) {
         super(context);
         surfHolder = getHolder();
         drawingThread = new Thread(this);
-       // drawingThread.start();
+        //drawingThread.start();
 
     }
 
-             public void run(){
-             while(isRunning){
-                 if(!surfHolder.getSurface().isValid())
-                     continue;
+    public void run() {
+        while (isRunning) {
+            if (!surfHolder.getSurface().isValid())
+                continue;
 
-                 Canvas canvas = surfHolder.lockCanvas();
-                 canvas.drawRGB(02,02,150);
-                 surfHolder.unlockCanvasAndPost(canvas);
-             }
+            Canvas canvas = surfHolder.lockCanvas();
+            canvas.drawRGB(255, 255, 255);
+            surfHolder.unlockCanvasAndPost(canvas);
+        }
 
 
-     }
+    }
 
 
 }

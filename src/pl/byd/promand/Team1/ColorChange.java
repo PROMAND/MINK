@@ -185,6 +185,79 @@ public class ColorChange extends MyActivity {
                 }
             }
         });
+
+        final ImageButton whiteB = (ImageButton) findViewById(R.id.whiteB);
+        final ImageButton redB = (ImageButton) findViewById(R.id.redB);
+        final ImageButton yellowB = (ImageButton) findViewById(R.id.yellowB);
+        final ImageButton greenB = (ImageButton) findViewById(R.id.greenB);
+        final ImageButton blueB = (ImageButton) findViewById(R.id.blueB);
+        final ImageButton violetB = (ImageButton) findViewById(R.id.violetB);
+        final ImageButton greyB = (ImageButton) findViewById(R.id.greyB);
+        final ImageButton blackB = (ImageButton) findViewById(R.id.blackB);
+
+        whiteB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#FFFFFF");
+                hexField.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
+        });
+
+        redB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#FF0000");
+                hexField.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
+        });
+
+        yellowB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#FFFF00");
+                hexField.setBackgroundColor(Color.parseColor("#FFFF00"));
+            }
+        });
+
+        greenB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#00FF00");
+                hexField.setBackgroundColor(Color.parseColor("#00FF00"));
+            }
+        });
+
+        blueB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#0000FF");
+                hexField.setBackgroundColor(Color.parseColor("#0000FF"));
+            }
+        });
+
+        violetB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#CC00FF");
+                hexField.setBackgroundColor(Color.parseColor("#CC00FF"));
+            }
+        });
+
+        greyB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#676767");
+                hexField.setBackgroundColor(Color.parseColor("#676767"));
+            }
+        });
+
+        blackB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hexField.setText("#000000");
+                hexField.setBackgroundColor(Color.parseColor("#000000"));
+            }
+        });
     }
 
     @Override
