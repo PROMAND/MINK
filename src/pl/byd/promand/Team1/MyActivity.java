@@ -7,19 +7,20 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.*;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.*;
 import com.promand.Team1.R;
+
+import java.util.ArrayList;
 
 public class MyActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
-    SurfaceView view;
-    Context context = this;
-    LinearLayout surfaceViewLayout;
-
+      SurfaceView view;
+      LinearLayout surfaceViewLayout;//
+      Context context = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class MyActivity extends Activity {
         Button settings = (Button) findViewById(R.id.button4);
         view = (SurfaceView) findViewById(R.id.surfaceView1);
         surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
+        ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
+        ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
 
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -68,6 +71,87 @@ public class MyActivity extends Activity {
        surfaceViewLayout.addView(new SurfaceViewDraw(this));
 
 
+          AddNew.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.new_image);
+                dialog.setTitle("An image is opened");
+
+                Button no = (Button) dialog.findViewById(R.id.bNo);
+                Button yes = (Button) dialog.findViewById(R.id.bYes);
+
+                no.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                yes.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        //*********************************
+                        //New image
+                        //**********************************
+                    }
+
+                });
+                dialog.show();
+            }
+        });
+
+        SaveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.save);
+                dialog.setTitle("Choose the folder");
+
+                final ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
+                Button save = (Button) dialog.findViewById(R.id.bSave);
+                Button exit = (Button) dialog.findViewById(R.id.bCancel);
+
+                final Folders folder = new Folders();
+                folder.setCurrentPath(Environment.getExternalStorageDirectory());
+
+                final ArrayList<String> values = new ArrayList<String>(folder.getListOfFolders());
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (context, R.layout.adapter, R.id.tFolderName, values);
+
+                folderSave.setAdapter(adapter);
+
+                folderSave.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                        String s = values.get(position);
+
+                        Toast.makeText(MyActivity.this, "Folder: "+s, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+
+                exit.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                save.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        Toast.makeText(context, "File is saved", 3000).show();
+                        dialog.dismiss();
+                    }
+
+                });
+                dialog.show();
+            }
+        });
     }
 
     @Override
