@@ -22,7 +22,7 @@ public class ShareActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ShareActivity.this, "Image shared in checked social networks", 3000).show();
-                Intent i = new Intent(ShareActivity.this, SettingsActivity.class);
+                Intent i = new Intent(ShareActivity.this, MyActivity.class);
                 startActivity(i);
             }
         });
@@ -30,7 +30,7 @@ public class ShareActivity extends Activity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ShareActivity.this, SettingsActivity.class);
+                Intent i = new Intent(ShareActivity.this, MyActivity.class);
                 startActivity(i);
             }
         });

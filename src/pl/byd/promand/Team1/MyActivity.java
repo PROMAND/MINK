@@ -37,6 +37,7 @@ public class MyActivity extends Activity {
         surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
         ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
         ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
+        ImageButton ShareButton = (ImageButton) findViewById(R.id.upbutton4);
 
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -150,6 +151,13 @@ public class MyActivity extends Activity {
 
                 });
                 dialog.show();
+            }
+        });
+
+        ShareButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(context, ShareActivity.class);
+                startActivity(i);
             }
         });
     }
