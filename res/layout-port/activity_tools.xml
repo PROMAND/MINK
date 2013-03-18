@@ -16,7 +16,7 @@
                      android:layout_alignParentTop="true"
                      android:layout_marginTop="60dp"
                      android:weightSum="2"
-                     android:layout_below="@+id/ToolsLayout4"
+
                      >
 
 
@@ -55,8 +55,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/ToolsLayout3"
+            android:layout_alignParentTop="false"
 
             android:weightSum="2"
             >
@@ -88,7 +88,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@+id/ToolsLayout3" android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ToolsLayout4" android:layout_centerHorizontal="true"
             android:weightSum="2"
 
             >
@@ -161,6 +161,27 @@
 
     </LinearLayout>
 
+    <LinearLayout
+            android:id="@+id/ToolsLayout7"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ToolsLayout6"
+            android:layout_alignParentTop="false"
+
+            android:weightSum="1"
+            >
+        <Button
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button2"
+
+                android:drawableLeft="@drawable/texting"
+                android:text="@string/text"
+                android:layout_weight="1" />
+
+    </LinearLayout>
 
           <!--
   <LinearLayout

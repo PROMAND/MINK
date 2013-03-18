@@ -39,7 +39,7 @@
             android:layout_width="80dp"
             android:layout_height="88dp"
             android:id="@+id/logo" android:layout_alignLeft="@+id/newButton" android:layout_alignParentTop="true"
-            android:src="@drawable/logopic1" android:layout_above="@+id/newButton"
+            android:src="@drawable/logopic2" android:layout_above="@+id/newButton"
             android:layout_alignBottom="@+id/textView"/>
 
 

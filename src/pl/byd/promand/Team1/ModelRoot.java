@@ -14,6 +14,7 @@ public class ModelRoot {
     private String color = "#FFFFFF";
     private String width = "1";
     private Bitmap bitmap;
+    private  String tool="pen";
 
     private final static ModelRoot root = new ModelRoot();
     public static ModelRoot getRoot() {
@@ -43,6 +44,15 @@ public class ModelRoot {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+
+    public String getTool() {
+        return tool;
+    }
+
+    public void setTool(String tool){
+        this.tool =tool;
+    }
+
 }
 
 
