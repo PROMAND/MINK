@@ -19,7 +19,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
    SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
-    float x, y;
+    float x, y, r;
 
     ArrayList<Path> pointsToDraw = new ArrayList<Path>();
     Paint mPaint;
@@ -43,7 +43,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
         x=0;
         y=0;
-
+        r=0;
 
         //drawing surface class
         view = new SurfaceViewDraw(context);
@@ -228,6 +228,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
        x = me.getX();
        y = me.getY();
+       r = Float.parseFloat(ModelRoot.getRoot().getWidth());
        return true;
     }
 
@@ -269,7 +270,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
                 if (photoBitmap==null)
                 {
                      if (x!=0 && y!=0)
-                       canvas.drawCircle(x, y, 50, mPaint);
+                       canvas.drawCircle(x, y, r, mPaint);
 
                 }
 
