@@ -64,7 +64,7 @@ public class MyActivity extends Activity {
             }
         });
 
-
+       //drawing class
        surfaceViewLayout.addView(new SurfaceViewDraw(this));
 
 
