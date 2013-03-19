@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -15,11 +16,13 @@ import android.view.*;
 import android.widget.*;
 import com.promand.Team1.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MyActivity extends Activity implements View.OnTouchListener {
 
-   SurfaceViewDraw view;
+  public static SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
 
@@ -31,8 +34,8 @@ public class MyActivity extends Activity implements View.OnTouchListener {
     Paint mPaint;
     int color = Color.GREEN;
     int backgroundColor = Color.WHITE;
-    Path path;
     private Dialog start;
+    String path;
 
 
     @Override
@@ -96,6 +99,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         surfaceViewLayout = (LinearLayout) findViewById(R.id.SurfaceViewLayout);
         ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
         ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
+        ImageButton taptoshare = (ImageButton) findViewById(R.id.upbutton4);
         x=0;
         y=0;
         r=0;
@@ -235,14 +239,14 @@ public class MyActivity extends Activity implements View.OnTouchListener {
     @Override
     protected void onResume() {
         super.onResume();
-      
+
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-     
+
 
     }
 
@@ -309,7 +313,5 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
         return false;
     }
-
-
 
 }
