@@ -72,6 +72,7 @@ public class ModelRoot {
 
     public  void setToolI(Drawable toolI){
         this.toolI=toolI;
+
     }
 
 }
