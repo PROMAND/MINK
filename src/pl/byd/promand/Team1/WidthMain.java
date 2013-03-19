@@ -5,6 +5,8 @@ package pl.byd.promand.Team1;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import com.promand.Team1.R;
@@ -20,6 +22,17 @@ public class WidthMain extends Activity {
         setContentView(R.layout.activity_width_main);
         bar = (SeekBar) findViewById(R.id.seekbar);
         txtNumbers = (TextView) findViewById(R.id.TextView01);
+
+        Button SetWidth = (Button)findViewById(R.id.bSetWidth);
+
+        SetWidth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -41,6 +54,7 @@ public class WidthMain extends Activity {
                 txtNumbers.setText(String.valueOf(arg1));
                 ModelRoot.getRoot().setWidth(String.valueOf(arg1));
 				setResult(2, getIntent());
+
             }
         });
     }
@@ -49,6 +63,7 @@ public class WidthMain extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.layout.activity_width_main, menu);
+
         return true;
     }
 

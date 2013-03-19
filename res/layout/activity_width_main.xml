@@ -20,7 +20,7 @@
         android:max="10"
         
         android:secondaryProgress="75"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" android:layout_below="@+id/textView1" android:layout_marginTop="40dp"/>
 
    
 
@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="false"
-        android:text="@string/width" android:layout_alignParentTop="false" android:layout_alignParentBottom="false"
+        android:text="@string/width" android:layout_alignParentTop="true" android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true" android:textStyle="bold"
-        android:textSize="20dp" android:layout_alignBottom="@+id/seekbar" android:layout_marginBottom="50dp"/>
+        android:textSize="20dp" android:layout_marginTop="50dp"/>
 
     <TextView
         android:id="@+id/TextView01"
@@ -40,5 +40,11 @@
         android:hint="@string/widthNumbers" android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/seekbar" android:layout_marginTop="50dp" android:textStyle="bold"
         android:textSize="20dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set width"
+            android:id="@+id/bSetWidth" android:layout_centerHorizontal="true" android:layout_alignParentTop="false"
+            android:layout_marginTop="20dp" android:layout_below="@+id/TextView01" android:longClickable="false"/>
 
 </RelativeLayout>
