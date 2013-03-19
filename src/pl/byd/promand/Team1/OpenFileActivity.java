@@ -31,13 +31,14 @@ public class OpenFileActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     ModelRoot.getRoot().setFilePath(ModelRoot.getRoot().getPreviousPath());
-                    recreate();
+                   // recreate();
+
                 } else {
                     File file = new File(fileContent.get(position));
                     if (file.isDirectory()) {
                         ModelRoot.getRoot().setPreviousPath(ModelRoot.getRoot().getFilePath());
                         ModelRoot.getRoot().setFilePath(file.getPath());
-                        recreate();
+                  //      recreate();
                     }
                     if (file.isFile() && file.getPath().endsWith(".jpg")) {
                         ModelRoot.getRoot().setFilePath(file.getPath());
