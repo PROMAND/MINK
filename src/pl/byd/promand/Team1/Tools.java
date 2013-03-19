@@ -16,30 +16,30 @@ import android.content.Intent;
 
 public class Tools extends Activity {
 
-     Button btnBrush;
-     Button btnPen;
-     Button btnEraser;
-     Button btnFiller;
-     Button btnLine;
-     Button btnCurvedLine;
-     Button btnText;
-     Button btnCircle;
-     Button btnRectangle;
+     ImageButton btnBrush;
+     ImageButton btnPen;
+     ImageButton btnEraser;
+     ImageButton btnFiller;
+     ImageButton btnLine;
+     ImageButton btnCurvedLine;
+     ImageButton btnText;
+     ImageButton btnCircle;
+     ImageButton btnRectangle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tools);
 
-       btnBrush = (Button)findViewById(R.id.button1);
-       btnPen = (Button) findViewById(R.id.button4);
-       btnEraser = (Button) findViewById(R.id.button3);
-       btnFiller = (Button) findViewById(R.id.button2);
-       btnLine = (Button) findViewById(R.id.button6);
-       btnCurvedLine = (Button) findViewById(R.id.button5);
-       btnText = (Button) findViewById(R.id.button7);
-       btnCircle =  (Button) findViewById(R.id.button8);
-       btnRectangle= (Button) findViewById(R.id.button9);
+       btnBrush = (ImageButton) findViewById(R.id.button1);
+       btnPen = (ImageButton) findViewById(R.id.button4);
+       btnEraser = (ImageButton) findViewById(R.id.button3);
+       btnFiller = (ImageButton) findViewById(R.id.button2);
+       btnLine = (ImageButton) findViewById(R.id.button6);
+       btnCurvedLine = (ImageButton) findViewById(R.id.button5);
+       btnText = (ImageButton) findViewById(R.id.button7);
+       btnCircle =  (ImageButton) findViewById(R.id.button8);
+       btnRectangle= (ImageButton) findViewById(R.id.button9);
 
        btnBrush.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -47,6 +47,8 @@ public class Tools extends Activity {
                showToastMessage("BRUSH has chosen");
                //super.onBackPressed();
                ModelRoot.getRoot().setTool("brush");
+               ModelRoot.getRoot().setToolI(btnBrush.getDrawable());
+
                Intent intent = new Intent();
                //setResult(RESULT_OK, intent);
                finish();
@@ -61,7 +63,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("PEN has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("pen");
+                ModelRoot.getRoot().setToolI(btnPen.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -76,7 +79,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("ERASER has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("eraser");
+                ModelRoot.getRoot().setToolI(btnEraser.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -91,7 +95,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("FILLER has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("filler");
+                ModelRoot.getRoot().setToolI(btnFiller.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -106,7 +111,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("LINE has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("fill");
+                ModelRoot.getRoot().setToolI(btnLine.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -121,7 +127,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("CURVED LINE has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("curved_line");
+                ModelRoot.getRoot().setToolI(btnCurvedLine.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -136,7 +143,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("TEXT has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("text");
+                ModelRoot.getRoot().setToolI(btnText.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -151,7 +159,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("CIRCLE has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("circle");
+                ModelRoot.getRoot().setToolI(btnCircle.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -166,7 +175,8 @@ public class Tools extends Activity {
             public void onClick(View v) {
                 showToastMessage("RECTANGLE has chosen");
                 //super.onBackPressed();
-
+                ModelRoot.getRoot().setTool("rectangle");
+                ModelRoot.getRoot().setToolI(btnRectangle.getDrawable());
                 Intent intent = new Intent();
                 //setResult(RESULT_OK, intent);
                 finish();
@@ -176,8 +186,10 @@ public class Tools extends Activity {
 
         });
 
+        setResult(5,getIntent());
 
 	}
+
 
     /** Called when the user touches the button */
     /** public void testing(View v) {

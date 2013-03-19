@@ -24,6 +24,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
     ArrayList<Path> pointsToDraw = new ArrayList<Path>();
     Paint mPaint;
     Path path;
+    private Button tools;
 
 
     @Override
@@ -31,7 +32,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Button tools = (Button) findViewById(R.id.button1);
+        tools = (Button) findViewById(R.id.button1);
         Button width = (Button) findViewById(R.id.button2);
         width.setText(width.getText() + " " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
@@ -65,7 +66,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(context, Tools.class);
-                startActivity(i);
+                startActivityForResult(i, 5);
             }
         });
 
@@ -217,6 +218,10 @@ public class MyActivity extends Activity implements View.OnTouchListener{
           // SurfaceView photoSurface = new SurfaceViewDraw(context, tempBitmap);
          //  surfaceViewLayout.addView(photoSurface);
 
+        }
+
+        if(resultCode==5){
+            tools.setCompoundDrawables(null,null, ModelRoot.getRoot().getToolI(),null);
         }
 
 
