@@ -31,4 +31,5 @@
     <string name="text">Text</string>
     <string name="rectangle">Rectangle</string>
     <string name="pen">Pen</string>
+    <string name="exit">Exit</string>
 </resources>

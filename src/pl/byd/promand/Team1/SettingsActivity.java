@@ -124,7 +124,7 @@ public class SettingsActivity extends Activity {
         loadImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(context);
+                /*final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.load);
                 dialog.setTitle("Choose the folder");
 
@@ -166,14 +166,14 @@ public class SettingsActivity extends Activity {
 
                 load.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        //*********************************
+                        /*//*********************************
                         //loading image
-                        //**********************************
+                        /*//**********************************
                     }
 
                 });
 
-                dialog.show();
+                dialog.show();*/
             }
         });
 

@@ -4,17 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: user
- * Date: 15.03.13
- * Time: 13:01
- * To change this template use File | Settings | File Templates.
- */
 public class ModelRoot {
     private String color = "#FFFFFF";
     private String width = "1";
     private Bitmap bitmap;
+    private String filePath;
+    private String previousPath;      //required for OpenFileActivity... and probably for saving file
     private  String tool="pen";
     private Drawable toolI;
 
@@ -45,6 +40,22 @@ public class ModelRoot {
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getPreviousPath() {
+        return previousPath;
+    }
+
+    public void setPreviousPath(String previousPath) {
+        this.previousPath = previousPath;
     }
 
     public String getTool() {
