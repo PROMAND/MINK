@@ -1,6 +1,8 @@
 package pl.byd.promand.Team1;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 
 public class ModelRoot {
     private String color = "#FFFFFF";
@@ -9,6 +11,7 @@ public class ModelRoot {
     private String filePath;
     private String previousPath;      //required for OpenFileActivity... and probably for saving file
     private  String tool="pen";
+    private Drawable toolI;
 
     private final static ModelRoot root = new ModelRoot();
     public static ModelRoot getRoot() {
@@ -61,6 +64,15 @@ public class ModelRoot {
 
     public void setTool(String tool){
         this.tool =tool;
+    }
+
+    public  Drawable getToolI() {
+        return toolI;
+    }
+
+    public  void setToolI(Drawable toolI){
+        this.toolI=toolI;
+
     }
 
 }

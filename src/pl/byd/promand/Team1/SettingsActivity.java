@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.SurfaceView;
@@ -15,6 +16,7 @@ import android.widget.*;
 import com.promand.Team1.R;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
@@ -187,8 +189,9 @@ public class SettingsActivity extends Activity {
 
         share.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, ShareActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(context, ShareActivity.class);
+//                startActivity(i);
+                taptoshare();
             }
         });
 
@@ -222,7 +225,36 @@ public class SettingsActivity extends Activity {
     }
 
 
+    public void taptoshare()
+    {
+//        View content = findViewById(R.id.SurfaceViewLayout);
+        View content = MyActivity.view;
+        content.setDrawingCacheEnabled(true);
+        Bitmap bitmap = content.getDrawingCache();
+        File file = new File(getExternalCacheDir(), "image.jpg");
+        try
+        {
+            file.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+            ostream.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
+
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        share.putExtra(Intent.EXTRA_STREAM,
+                Uri.parse("file:///" + file.getAbsolutePath()));
+
+        startActivity(Intent.createChooser(share, "Share Image"));
+
+    }
 
 
 

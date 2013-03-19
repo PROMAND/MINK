@@ -20,22 +20,22 @@
                      >
 
 
-    <Button
+    <ImageButton
         android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/brush"
+        android:src="@drawable/brush"
         android:text="@string/brush"
 
         android:layout_weight="1"    />
 
-    <Button
+    <ImageButton
         android:id="@+id/button4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button2"
         android:layout_toRightOf="@+id/button1"
-        android:drawableLeft="@drawable/pen"
+        android:src="@drawable/pen"
         android:text="@string/pen"
         android:layout_weight="1"   />
       <!--
@@ -60,24 +60,24 @@
 
             android:weightSum="2"
             >
-        <Button
+        <ImageButton
                 android:id="@+id/button3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
                 android:layout_below="@+id/button1"
-                android:drawableLeft="@drawable/eraser"
+                android:src="@drawable/eraser"
                 android:text="@string/eraser"
                 android:layout_weight="1"
                 />
-        <Button
+        <ImageButton
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/button1"
                 android:layout_alignRight="@+id/button1"
                 android:layout_below="@+id/button1"
-                android:drawableLeft="@drawable/fill"
+                android:src="@drawable/fill"
                 android:text="@string/fill"
                 android:layout_weight="1"
               />
@@ -93,7 +93,7 @@
 
             >
 
-        <Button
+        <ImageButton
                 android:id="@+id/button6"
 
                 android:layout_width="0dp"
@@ -102,10 +102,10 @@
                 android:layout_alignBottom="@+id/button2"
 
                 android:text="@string/line"
-                android:drawableLeft="@drawable/line"
+                android:src="@drawable/line"
                 android:layout_weight="1" />
 
-        <Button
+        <ImageButton
                 android:id="@+id/button5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 android:layout_alignRight="@+id/button6"
                 android:layout_alignTop="@+id/button3"
                 android:layout_below="@+id/button7"
-                android:drawableLeft="@drawable/curved_line"
+                android:src="@drawable/curved_line"
                 android:text="@string/curvedLine"
                 android:layout_weight="1"/>
 
@@ -131,7 +131,7 @@
             android:weightSum="2"
 
             >
-        <Button
+        <ImageButton
                 android:id="@+id/button8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -140,11 +140,11 @@
                 android:layout_alignRight="@+id/button9"
 
                 android:layout_below="@+id/button7"
-                android:drawableLeft="@drawable/circle"
+                android:src="@drawable/circle"
                 android:text="@string/circle"
                 android:layout_weight="1"
                 />
-        <Button
+        <ImageButton
                 android:id="@+id/button9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                 android:layout_alignRight="@+id/button9"
 
                 android:layout_below="@+id/button7"
-                android:drawableLeft="@drawable/rectangle"
+                android:src="@drawable/rectangle"
                 android:text="@string/rectangle"
                 android:layout_weight="1"
                 />
@@ -171,13 +171,13 @@
 
             android:weightSum="1"
             >
-        <Button
+        <ImageButton
                 android:id="@+id/button7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/button2"
 
-                android:drawableLeft="@drawable/texting"
+                android:src="@drawable/texting"
                 android:text="@string/text"
                 android:layout_weight="1" />
 

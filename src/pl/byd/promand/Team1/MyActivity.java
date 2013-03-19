@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -15,11 +16,13 @@ import android.view.*;
 import android.widget.*;
 import com.promand.Team1.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MyActivity extends Activity implements View.OnTouchListener {
 
-   SurfaceViewDraw view;
+  public static SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
 
@@ -31,8 +34,9 @@ public class MyActivity extends Activity implements View.OnTouchListener {
     Paint mPaint;
     int color = Color.GREEN;
     int backgroundColor = Color.WHITE;
-    Path path;
     private Dialog start;
+    String path;
+    private Button tools;
 
 
     @Override
@@ -84,7 +88,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             }
         });
 
-        Button tools = (Button) findViewById(R.id.button1);
+        tools = (Button) findViewById(R.id.button1);
         Button width = (Button) findViewById(R.id.button2);
         width.setText(width.getText() + ": " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
@@ -96,6 +100,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         surfaceViewLayout = (LinearLayout) findViewById(R.id.SurfaceViewLayout);
         ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
         ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
+        ImageButton taptoshare = (ImageButton) findViewById(R.id.upbutton4);
         x=0;
         y=0;
         r=0;
@@ -113,7 +118,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(context, Tools.class);
-                startActivity(i);
+                startActivityForResult(i,5);
             }
         });
 
@@ -235,14 +240,14 @@ public class MyActivity extends Activity implements View.OnTouchListener {
     @Override
     protected void onResume() {
         super.onResume();
-      
+
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-     
+
 
     }
 
@@ -267,6 +272,10 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         if (resultCode == 4) {
             view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
             start.dismiss();
+        }
+
+        if(resultCode==5){
+            tools.setCompoundDrawables(null,null,ModelRoot.getRoot().getToolI(),null);
         }
 
     }
@@ -309,7 +318,5 @@ public class MyActivity extends Activity implements View.OnTouchListener {
 
         return false;
     }
-
-
 
 }

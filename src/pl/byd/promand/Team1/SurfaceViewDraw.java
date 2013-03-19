@@ -78,7 +78,33 @@ public class SurfaceViewDraw extends SurfaceView {
 
         Canvas canvas = surfHolder.lockCanvas();
         //canvas.drawLine(drawPoints.x, drawPoints.y, x, y, mDrawPaint);
-        canvas.drawCircle(x,y,radius*5,mDrawPaint);
+        //canvas.drawCircle(x,y,radius*5,mDrawPaint);
+        if(ModelRoot.getRoot().getTool()=="pen"){
+               canvas.drawCircle(x, y, radius * 3, mDrawPaint); ///TODO adding colour maybe
+        }
+        if(ModelRoot.getRoot().getTool()=="text"){
+            Paint paint = new Paint();
+            paint.setColor(Color.WHITE); //here would be Color.getColor()
+            paint.setStyle(Paint.Style.FILL);
+            canvas.drawPaint(paint);
+
+            paint.setColor(Color.BLACK);
+            paint.setTextSize(20); //getWidth() sth
+            canvas.drawText("Some Text", x, x, paint);
+        }
+        if(ModelRoot.getRoot().getTool()=="rectangle"){  //similar to drawing a line
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            //paint.setStrokeWidth(3); // get from Width
+            paint.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(x, y, x+30, y+50, paint);
+           // paint.setStrokeWidth(0);
+           // paint.setColor(Color.CYAN);
+           // canvas.drawRect(33, 60, 77, 77, paint );
+           // paint.setColor(Color.YELLOW);
+           // canvas.drawRect(33, 33, 77, 60, paint );
+        }
+
         surfHolder.unlockCanvasAndPost(canvas);
         drawPoints.x = x;
         drawPoints.y = y;
