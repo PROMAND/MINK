@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.promand.Team1.R;
 
@@ -14,30 +15,29 @@ import java.util.ArrayList;
 public class OpenFileActivity extends Activity {
 
     private ArrayList<String> fileContent;
+    private ListView fileList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load);
         setResult(4, getIntent());
-        ListView fileList = (ListView) findViewById(R.id.fileList);
+        fileList = (ListView) findViewById(R.id.fileList);
 
-        fileContent = listFiles(ModelRoot.getRoot().getFilePath());
-
-        fileList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fileContent));
+        create(ModelRoot.getRoot().getFilePath());
 
         fileList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     ModelRoot.getRoot().setFilePath(ModelRoot.getRoot().getPreviousPath());
-                    recreate();
+                    create(ModelRoot.getRoot().getFilePath());
                 } else {
                     File file = new File(fileContent.get(position));
                     if (file.isDirectory()) {
                         ModelRoot.getRoot().setPreviousPath(ModelRoot.getRoot().getFilePath());
                         ModelRoot.getRoot().setFilePath(file.getPath());
-                        recreate();
+                        create(ModelRoot.getRoot().getFilePath());
                     }
                     if (file.isFile() && file.getPath().endsWith(".jpg")) {
                         ModelRoot.getRoot().setFilePath(file.getPath());
@@ -62,5 +62,11 @@ public class OpenFileActivity extends Activity {
         }
 
         return content;
+    }
+
+    public void create(String path) {
+        fileContent = listFiles(path);
+        fileList.removeAllViewsInLayout();
+        fileList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fileContent));
     }
 }
