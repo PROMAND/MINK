@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.*;
@@ -14,16 +15,17 @@ import com.promand.Team1.R;
 
 import java.util.ArrayList;
 
-public class MyActivity extends Activity implements View.OnTouchListener{
+public class MyActivity extends Activity implements View.OnTouchListener {
 
-   SurfaceViewDraw view;
+    SurfaceViewDraw view;
     Context context = this;
     LinearLayout surfaceViewLayout;
-    float x, y, r;
+    float x, y;
 
     ArrayList<Path> pointsToDraw = new ArrayList<Path>();
     Paint mPaint;
     Path path;
+    private Dialog start;
 
 
     @Override
@@ -31,19 +33,60 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        start = new Dialog(context);
+        start.setTitle("Let's start");
+        start.setContentView(R.layout.start_dialog);
+        start.setCancelable(false);
+        start.show();
+
+        ImageButton newFile = (ImageButton) start.findViewById(R.id.newButton);
+        ImageButton openFile = (ImageButton) start.findViewById(R.id.loadButton);
+        ImageButton takeAPhoto = (ImageButton) start.findViewById(R.id.takeAPhotoButton);
+        Button exit = (Button) start.findViewById(R.id.exitB);
+
+        newFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start.dismiss();
+            }
+        });
+
+        openFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start.dismiss();
+                ModelRoot.getRoot().setFilePath("/mnt");
+                Intent i = new Intent(context, OpenFileActivity.class);
+                startActivityForResult(i, 4);
+            }
+        });
+
+        takeAPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, 0);
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         Button tools = (Button) findViewById(R.id.button1);
         Button width = (Button) findViewById(R.id.button2);
-        width.setText(width.getText() + " " + ModelRoot.getRoot().getWidth());
+        width.setText(width.getText() + ": " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
-        colors.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         Button settings = (Button) findViewById(R.id.button4);
 
-        surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
+        surfaceViewLayout = (LinearLayout) findViewById(R.id.SurfaceViewLayout);
         ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
         ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
-        x=0;
-        y=0;
-        r=0;
+        x = 0;
+        y = 0;
 
         //drawing surface class
         view = new SurfaceViewDraw(context);
@@ -78,7 +121,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
         colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, ColorChange.class);
+                Intent i = new Intent(context, ColorChangeActivity.class);
                 startActivityForResult(i, 1);
             }
         });
@@ -155,7 +198,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
                         String s = values.get(position);
 
-                        Toast.makeText(MyActivity.this, "Folder: "+s, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyActivity.this, "Folder: " + s, Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -184,15 +227,14 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
     }
 
-  @Override
+    @Override
     protected void onResume() {
         super.onResume();
         view.resume();
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         view.pause();
 
@@ -201,10 +243,7 @@ public class MyActivity extends Activity implements View.OnTouchListener{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == 1) {
-            SurfaceView view = (SurfaceView) findViewById(R.id.surfaceView1);
-            view.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
-            Button colorB = (Button) findViewById(R.id.button3);
-            colorB.setBackgroundColor(Color.parseColor(ModelRoot.getRoot().getColor()));
+
         }
 
         if (resultCode == 2) {
@@ -219,6 +258,10 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
         }
 
+        if (resultCode == 4) {
+            view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
+            start.dismiss();
+        }
 
     }
 
@@ -228,7 +271,6 @@ public class MyActivity extends Activity implements View.OnTouchListener{
 
        x = me.getX();
        y = me.getY();
-       r = Float.parseFloat(ModelRoot.getRoot().getWidth());
        return true;
     }
 
@@ -241,16 +283,15 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         boolean isRunning = false;
         Bitmap photoBitmap;
 
-
         // constructor no. 1 - empty surface
-        public SurfaceViewDraw(Context context){
+        public SurfaceViewDraw(Context context) {
             super(context);
             surfHolder = getHolder();
             //setBackgroundColor(Color.rgb(250,255,240));
         }
 
         // constructor no. 2 - surface with photo
-        public SurfaceViewDraw(Context context, Bitmap bitmap){
+        public SurfaceViewDraw(Context context, Bitmap bitmap) {
             super(context);
             surfHolder = getHolder();
             photoBitmap = Bitmap.createBitmap(bitmap) ;
@@ -259,18 +300,16 @@ public class MyActivity extends Activity implements View.OnTouchListener{
         }
 
 
-        public void run()
-        {
-            while(isRunning)
-            {
-                if(!surfHolder.getSurface().isValid())
+        public void run() {
+            while (isRunning) {
+                if (!surfHolder.getSurface().isValid())
                     continue;
 
                 Canvas canvas = surfHolder.lockCanvas();
                 if (photoBitmap==null)
                 {
                      if (x!=0 && y!=0)
-                       canvas.drawCircle(x, y, r, mPaint);
+                       canvas.drawCircle(x, y, 50, mPaint);
 
                 }
 
@@ -281,11 +320,9 @@ public class MyActivity extends Activity implements View.OnTouchListener{
             }
         }
 
-        public void pause()
-        {
+        public void pause() {
             isRunning = false;
-            while(true)
-            {
+            while (true) {
                 try {
                     drawingThread.join();
                 } catch (InterruptedException e) {
@@ -296,15 +333,17 @@ public class MyActivity extends Activity implements View.OnTouchListener{
             drawingThread = null;
         }
 
-        public void resume()
-        {
+        public void resume() {
             isRunning = true;
             drawingThread = new Thread(this);
             drawingThread.start();
 
         }
 
+
     }
+
+
 
 
 

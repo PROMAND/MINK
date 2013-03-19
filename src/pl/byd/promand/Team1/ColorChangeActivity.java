@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -11,7 +12,7 @@ import com.promand.Team1.R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ColorChange extends MyActivity {
+public class ColorChangeActivity extends Activity {
     /**
      * Called when the activity is first created.
      */
@@ -119,11 +120,11 @@ public class ColorChange extends MyActivity {
                             color = "#" + color;
                         }
                         ModelRoot.getRoot().setColor(color);
-                        Toast.makeText(ColorChange.this, "Color selected", 5000).show();
+                        Toast.makeText(ColorChangeActivity.this, "Color selected", 5000).show();
                         setResult(1, getIntent());
                         finish();
                     } else {
-                        final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChange.this);
+                        final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChangeActivity.this);
                         alert.setTitle("Error!");
                         alert.setMessage("Please enter a valid hexadecimal color representation");
                         alert.setCancelable(true);
@@ -135,7 +136,7 @@ public class ColorChange extends MyActivity {
                         alert.show();
                     }
                 } else {
-                    final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChange.this);
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(ColorChangeActivity.this);
                     alert.setTitle("Error!");
                     alert.setMessage("Please enter a valid hexadecimal color representation");
                     alert.setCancelable(true);
@@ -198,7 +199,11 @@ public class ColorChange extends MyActivity {
         whiteB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(255);
+                greenSeek.setProgress(255);
+                blueSeek.setProgress(255);
                 hexField.setText("#FFFFFF");
+                hexField.setTextColor(Color.BLACK);
                 hexField.setBackgroundColor(Color.parseColor("#FFFFFF"));
             }
         });
@@ -206,6 +211,9 @@ public class ColorChange extends MyActivity {
         redB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(255);
+                greenSeek.setProgress(0);
+                blueSeek.setProgress(0);
                 hexField.setText("#FF0000");
                 hexField.setBackgroundColor(Color.parseColor("#FF0000"));
             }
@@ -214,7 +222,11 @@ public class ColorChange extends MyActivity {
         yellowB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(255);
+                greenSeek.setProgress(255);
+                blueSeek.setProgress(0);
                 hexField.setText("#FFFF00");
+                hexField.setTextColor(Color.BLACK);
                 hexField.setBackgroundColor(Color.parseColor("#FFFF00"));
             }
         });
@@ -222,7 +234,11 @@ public class ColorChange extends MyActivity {
         greenB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(0);
+                greenSeek.setProgress(255);
+                blueSeek.setProgress(0);
                 hexField.setText("#00FF00");
+                hexField.setTextColor(Color.BLACK);
                 hexField.setBackgroundColor(Color.parseColor("#00FF00"));
             }
         });
@@ -230,6 +246,9 @@ public class ColorChange extends MyActivity {
         blueB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(0);
+                greenSeek.setProgress(0);
+                blueSeek.setProgress(255);
                 hexField.setText("#0000FF");
                 hexField.setBackgroundColor(Color.parseColor("#0000FF"));
             }
@@ -238,6 +257,9 @@ public class ColorChange extends MyActivity {
         violetB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(204);
+                greenSeek.setProgress(0);
+                blueSeek.setProgress(255);
                 hexField.setText("#CC00FF");
                 hexField.setBackgroundColor(Color.parseColor("#CC00FF"));
             }
@@ -246,6 +268,9 @@ public class ColorChange extends MyActivity {
         greyB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(103);
+                greenSeek.setProgress(103);
+                blueSeek.setProgress(103);
                 hexField.setText("#676767");
                 hexField.setBackgroundColor(Color.parseColor("#676767"));
             }
@@ -254,6 +279,10 @@ public class ColorChange extends MyActivity {
         blackB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                redSeek.setProgress(0);
+                greenSeek.setProgress(0);
+                blueSeek.setProgress(0);
+                hexField.setTextColor(Color.WHITE);
                 hexField.setText("#000000");
                 hexField.setBackgroundColor(Color.parseColor("#000000"));
             }

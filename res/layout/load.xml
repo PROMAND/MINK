@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-   <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-
-        >
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout"
-        android:layout_below="@+id/lFolderLoad"
-        android:layout_marginTop="20dp">
-
-        <Button
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Exit"
-                android:id="@+id/bExit1" android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" android:longClickable="false"/>
-        <Button
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Load"
-                android:id="@+id/bLoad" android:layout_toRightOf="@+id/ePath" android:layout_alignBottom="@+id/bExit1"
-                />
-
-    </LinearLayout>
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListView
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lFolderLoad"
-            android:background="#ffe0f8"
-            />
-
-
-</RelativeLayout>
+            android:id="@+id/fileList"/>
+</LinearLayout>
