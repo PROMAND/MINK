@@ -1,6 +1,5 @@
 package pl.byd.promand.Team1;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,12 +13,16 @@ import android.os.Environment;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.internal.view.menu.ActionMenu;
+import com.actionbarsherlock.view.*;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.promand.Team1.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.io.*;
 
 public class MyActivity extends SherlockActivity {
 
@@ -31,70 +34,73 @@ public class MyActivity extends SherlockActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu ){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-    public boolean OnOptionItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.upbutton4:
-                taptoshare();
-            return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
 
-    }
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.upbutton2: {
+                start = new Dialog(context);
+                start.setTitle("Let's start");
+                start.setContentView(R.layout.start_dialog);
+                start.setCancelable(false);
+                start.show();
+
+                ImageButton newFile = (ImageButton) start.findViewById(R.id.newButton);
+                ImageButton openFile = (ImageButton) start.findViewById(R.id.loadButton);
+                ImageButton takeAPhoto = (ImageButton) start.findViewById(R.id.takeAPhotoButton);
+                Button exit = (Button) start.findViewById(R.id.exitB);
+
+                newFile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        start.dismiss();
+                    }
+                });
+
+                openFile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        start.dismiss();
+                        ModelRoot.getRoot().setFilePath("/mnt");
+                        Intent i = new Intent(context, OpenFileActivity.class);
+                        startActivityForResult(i, 4);
+                    }
+                });
+
+                takeAPhoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent, 0);
+                    }
+                });
+
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+                break;
+            }
+            case R.id.upbutton4: {
+                taptoshare();
+            }
+            default: {
+                break;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        //Start dialog
-        start = new Dialog(context);
-        start.setTitle("Let's start");
-        start.setContentView(R.layout.start_dialog);
-        start.setCancelable(false);
-        start.show();
-
-        ImageButton newFile = (ImageButton) start.findViewById(R.id.newButton);
-        ImageButton openFile = (ImageButton) start.findViewById(R.id.loadButton);
-        ImageButton takeAPhoto = (ImageButton) start.findViewById(R.id.takeAPhotoButton);
-        Button exit = (Button) start.findViewById(R.id.exitB);
-
-        newFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start.dismiss();
-            }
-        });
-
-        openFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start.dismiss();
-                ModelRoot.getRoot().setFilePath("/mnt");
-                Intent i = new Intent(context, OpenFileActivity.class);
-                startActivityForResult(i, 4);
-            }
-        });
-
-        takeAPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, 0);
-            }
-        });
-
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
         //Main screen (bottom buttons)
         tools = (Button) findViewById(R.id.button1);
@@ -235,26 +241,29 @@ public class MyActivity extends SherlockActivity {
 
         width.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-              //  Intent i = new Intent(context, WidthMainActivity.class);
-             //   startActivityForResult(i, 2);
 
                 final Dialog dialogWidth = new Dialog(context);
 
                 dialogWidth.setContentView(R.layout.activity_width_main);
                 SeekBar bar = (SeekBar) dialogWidth.findViewById(R.id.seekbar);
                 final TextView txtNumbers = (TextView) dialogWidth.findViewById(R.id.TextView01);
-                Button SetWidth = (Button)dialogWidth.findViewById(R.id.bSetWidth);
+                Button SetWidth = (Button) dialogWidth.findViewById(R.id.bSetWidth);
 
 
-                SetWidth.setOnClickListener(new View.OnClickListener()
-                {
+                SetWidth.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         dialogWidth.dismiss();
                     }
                 });
 
+                dialogWidth.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Button widthB = (Button) findViewById(R.id.button2);
+                        widthB.setText("Width: " + ModelRoot.getRoot().getWidth());
+                    }
+                });
 
                 bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -272,14 +281,10 @@ public class MyActivity extends SherlockActivity {
                     public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
                         txtNumbers.setText(String.valueOf(arg1));
                         ModelRoot.getRoot().setWidth(String.valueOf(arg1));
-                     }
+                    }
                 });
 
                 dialogWidth.show();
-
-
-
-
             }
         });
 
@@ -299,107 +304,17 @@ public class MyActivity extends SherlockActivity {
             }
         });
 
-        //Main screen (top buttons) - will be replaced with Action bar
-        ImageButton addNew = (ImageButton) findViewById(R.id.upbutton2);
-        ImageButton saveButton = (ImageButton) findViewById(R.id.upbutton3);
-        ImageButton shareButton = (ImageButton) findViewById(R.id.upbutton4);
-
-        addNew.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.new_image);
-                dialog.setTitle("An image is opened");
-
-                Button no = (Button) dialog.findViewById(R.id.bNo);
-                Button yes = (Button) dialog.findViewById(R.id.bYes);
-
-                no.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                yes.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        //*********************************
-                        //New image
-                        //**********************************
-
-                        dialog.dismiss();
-
-                    }
-
-                });
-                dialog.show();
-            }
-        });
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.save);
-                dialog.setTitle("Choose the folder");
-
-                final ListView folderSave = (ListView) dialog.findViewById(R.id.lFolderSave);
-                Button save = (Button) dialog.findViewById(R.id.bSave);
-                Button exit = (Button) dialog.findViewById(R.id.bCancel);
-
-                final Folders folder = new Folders();
-                folder.setCurrentPath(Environment.getExternalStorageDirectory());
-
-                final ArrayList<String> values = new ArrayList<String>(folder.getListOfFolders());
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (context, R.layout.adapter, R.id.tFolderName, values);
-
-                folderSave.setAdapter(adapter);
-
-                folderSave.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-                        String s = values.get(position);
-
-                        Toast.makeText(MyActivity.this, "Folder: " + s, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-
-                exit.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                save.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-
-                        Toast.makeText(context, "File is saved", 3000).show();
-                        dialog.dismiss();
-                    }
-
-                });
-                dialog.show();
-            }
-        });
-
         view = new SurfaceViewDraw(this);
         view.setBackgroundColor(Color.WHITE);
-        Display display = getWindowManager().getDefaultDisplay();
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(display.getWidth(), (display.getHeight()-150));
-        addContentView(view, params);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.forSurfaceViewDraw);
+        layout.addView(view);
     }
 
     //Functionality
     @Override
     protected void onResume() {
         super.onResume();
-      
+
     }
 
     @Override
@@ -410,9 +325,6 @@ public class MyActivity extends SherlockActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == 1) {
-            start.dismiss();
-        }
 
         if (resultCode == 2) {
             start.dismiss();
@@ -426,7 +338,6 @@ public class MyActivity extends SherlockActivity {
 
         if (resultCode == 4) {
             view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
-            start.dismiss();
         }
     }
 
@@ -437,25 +348,21 @@ public class MyActivity extends SherlockActivity {
         toast.show();
 
     }
-    public void taptoshare()
-    {
+
+    public void taptoshare() {
 //        View content = findViewById(R.id.SurfaceViewLayout);
         View content = MyActivity.view;
         content.setDrawingCacheEnabled(true);
         Bitmap bitmap = content.getDrawingCache();
         File file = new File(getExternalCacheDir(), "image.jpg");
-        try
-        {
+        try {
             file.createNewFile();
             FileOutputStream ostream = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
             ostream.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
         Intent share = new Intent(Intent.ACTION_SEND);
