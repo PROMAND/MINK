@@ -8,12 +8,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.promand.Team1.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ColorChangeActivity extends Activity {
+public class ColorChangeActivity extends SherlockActivity {
     /**
      * Called when the activity is first created.
      */

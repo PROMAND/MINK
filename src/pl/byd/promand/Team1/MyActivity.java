@@ -3,6 +3,7 @@ package pl.byd.promand.Team1;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
@@ -11,11 +12,12 @@ import android.os.Environment;
 
 import android.view.*;
 import android.widget.*;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.promand.Team1.R;
 
 import java.util.ArrayList;
 
-public class MyActivity extends Activity {
+public class MyActivity extends SherlockActivity {
 
     public static SurfaceViewDraw view;
     Context context = this;
@@ -83,8 +85,131 @@ public class MyActivity extends Activity {
 
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, ToolsActivity.class);
-                startActivityForResult(i,5);
+                final Dialog toolD = new Dialog(MyActivity.this);
+                toolD.setTitle("Select a tool");
+                toolD.setContentView(R.layout.activity_tools);
+                toolD.show();
+
+                final ImageButton btnBrush = (ImageButton) toolD.findViewById(R.id.button1);
+                final ImageButton btnPen = (ImageButton) toolD.findViewById(R.id.button4);
+                final ImageButton btnEraser = (ImageButton) toolD.findViewById(R.id.button3);
+                final ImageButton btnFiller = (ImageButton) toolD.findViewById(R.id.button2);
+                final ImageButton btnLine = (ImageButton) toolD.findViewById(R.id.button6);
+                final ImageButton btnCurvedLine = (ImageButton) toolD.findViewById(R.id.button5);
+                final ImageButton btnText = (ImageButton) toolD.findViewById(R.id.button7);
+                final ImageButton btnCircle = (ImageButton) toolD.findViewById(R.id.button8);
+                final ImageButton btnRectangle = (ImageButton) toolD.findViewById(R.id.button9);
+
+                btnBrush.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("BRUSH has chosen");
+                        ModelRoot.getRoot().setTool("brush");
+                        ModelRoot.getRoot().setToolI(btnBrush.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnPen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("PEN has chosen");
+                        ModelRoot.getRoot().setTool("pen");
+                        ModelRoot.getRoot().setToolI(btnPen.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnEraser.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("ERASER has chosen");
+                        ModelRoot.getRoot().setTool("eraser");
+                        ModelRoot.getRoot().setToolI(btnEraser.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnFiller.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("FILLER has chosen");
+                        ModelRoot.getRoot().setTool("filler");
+                        ModelRoot.getRoot().setToolI(btnFiller.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnLine.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("LINE has chosen");
+                        ModelRoot.getRoot().setTool("fill");
+                        ModelRoot.getRoot().setToolI(btnLine.getDrawable());
+                        toolD.dismiss();
+                    }
+                });
+
+                btnCurvedLine.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("CURVED LINE has chosen");
+                        ModelRoot.getRoot().setTool("curved_line");
+                        ModelRoot.getRoot().setToolI(btnCurvedLine.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("TEXT has chosen");
+                        ModelRoot.getRoot().setTool("text");
+                        ModelRoot.getRoot().setToolI(btnText.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnCircle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("CIRCLE has chosen");
+                        ModelRoot.getRoot().setTool("circle");
+                        ModelRoot.getRoot().setToolI(btnCircle.getDrawable());
+                        toolD.dismiss();
+                    }
+
+
+                });
+
+                btnRectangle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToastMessage("RECTANGLE has chosen");
+                        ModelRoot.getRoot().setTool("rectangle");
+                        ModelRoot.getRoot().setToolI(btnRectangle.getDrawable());
+                        toolD.dismiss();
+                    }
+                });
+
+                toolD.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        tools.setCompoundDrawables(null, null, ModelRoot.getRoot().getToolI(), null);
+                    }
+                });
             }
         });
 
@@ -283,11 +408,13 @@ public class MyActivity extends Activity {
             view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
             start.dismiss();
         }
+    }
 
-        if(resultCode==5){
-            tools.setCompoundDrawables(null, null, ModelRoot.getRoot().getToolI(), null);
-            start.dismiss();
-        }
+    private void showToastMessage(String msg) {
+
+        Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+
+        toast.show();
 
     }
 }

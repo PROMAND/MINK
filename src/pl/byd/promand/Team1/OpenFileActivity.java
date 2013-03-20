@@ -8,12 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.promand.Team1.R;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class OpenFileActivity extends Activity {
+public class OpenFileActivity extends SherlockActivity {
 
     private ArrayList<String> fileContent;
     private ListView fileList;

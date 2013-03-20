@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.*;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.promand.Team1.R;
 
 import java.io.File;
@@ -21,7 +22,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends SherlockActivity {
 
     public static Bitmap bitmap;
 

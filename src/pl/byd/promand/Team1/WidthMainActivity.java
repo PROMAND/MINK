@@ -1,18 +1,15 @@
 package pl.byd.promand.Team1;
 
-//import com.example.R;
-
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.promand.Team1.R;
 
-public class WidthMainActivity extends Activity {
+public class WidthMainActivity extends SherlockActivity {
 
     SeekBar bar;
     TextView txtNumbers;
@@ -63,7 +60,7 @@ public class WidthMainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.layout.activity_width_main, menu);
+        getSupportMenuInflater().inflate(R.layout.activity_width_main, menu);
 
         return true;
     }

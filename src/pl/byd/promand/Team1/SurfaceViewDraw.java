@@ -34,14 +34,8 @@ public class SurfaceViewDraw extends View {
 
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                //resets the screen
-                path.reset();
-
-                //Calls the onDraw() method
-                postInvalidate();
-
-
+        path.reset();
+        postInvalidate();
     }
 
     @Override
@@ -54,30 +48,23 @@ public class SurfaceViewDraw extends View {
         float pointX = event.getX();
         float pointY = event.getY();
 
-        // Checks for the event that occurs
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN: {
                 path.moveTo(pointX, pointY);
-
                 return true;
-            case MotionEvent.ACTION_MOVE:
+            }
+            case MotionEvent.ACTION_MOVE: {
                 path.lineTo(pointX, pointY);
-                // (circle's center x-coordinate, y-coordinate, radius of the
-                // circle, direction to wind the shape)
-                //circlePath.addRect(pointX - 25, pointY - 25, pointX + 25, pointY + 25, Path.Direction.CW);
-/*			RectF rect = new RectF(pointX - 25, pointY - 25, pointX + 25, pointY + 25);
-			circlePath.addRoundRect(rect, 0, 0, Path.Direction.CW);
-*/
                 break;
-
-            case MotionEvent.ACTION_UP:
+            }
+            case MotionEvent.ACTION_UP: {
                 break;
-            default:
+            }
+            default: {
                 return false;
+            }
         }
 
-        // Schedules a repaint.
-        // Force a view to draw.
         postInvalidate();
         return true;
     }
