@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.promand.Team1.R;
 
 import java.util.ArrayList;
@@ -25,6 +26,12 @@ public class MyActivity extends SherlockActivity {
     String path;
     private Button tools;
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu ){
+        getSupportMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -75,6 +82,7 @@ public class MyActivity extends SherlockActivity {
                 finish();
             }
         });
+
 
         //Main screen (bottom buttons)
         tools = (Button) findViewById(R.id.button1);
