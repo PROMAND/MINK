@@ -27,19 +27,20 @@ public class SurfaceViewDraw extends View {
         super(context);
 
         paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeWidth(Float.parseFloat(ModelRoot.getRoot().getWidth()) * 2);
 
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        path.reset();
+
+        setDrawingCacheEnabled(true);
         postInvalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        paint.setStrokeWidth(Float.parseFloat(ModelRoot.getRoot().getWidth()) * 2);
+        paint.setColor(Color.parseColor(ModelRoot.getRoot().getColor()));
         canvas.drawPath(path, paint);
         if(ModelRoot.getRoot().getTool().equals("rectangle")){
             drawRectangle(canvas);    //Just for testing

@@ -167,7 +167,7 @@ public class SettingsActivity extends SherlockActivity {
             Bundle ex = data.getExtras();
             bitmap = (Bitmap)ex.get("data");
 
-            ModelRoot.getRoot().setBitmap(bitmap);
+
             setResult(3, getIntent());
             SettingsActivity.this.finish();
 

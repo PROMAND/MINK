@@ -32,12 +32,15 @@ public class OpenFileActivity extends SherlockActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    ModelRoot.getRoot().setFilePath(ModelRoot.getRoot().getPreviousPath());
+                    ModelRoot.getRoot().setFilePath(ModelRoot.getRoot().getPreviousPath().
+                            get(ModelRoot.getRoot().getPreviousPath().size()-1));
+                    ModelRoot.getRoot().getPreviousPath().remove(ModelRoot.getRoot().getPreviousPath().
+                            get(ModelRoot.getRoot().getPreviousPath().size()-1));
                     create(ModelRoot.getRoot().getFilePath());
                 } else {
                     File file = new File(fileContent.get(position));
                     if (file.isDirectory()) {
-                        ModelRoot.getRoot().setPreviousPath(ModelRoot.getRoot().getFilePath());
+                        ModelRoot.getRoot().getPreviousPath().add(ModelRoot.getRoot().getFilePath());
                         ModelRoot.getRoot().setFilePath(file.getPath());
                         create(ModelRoot.getRoot().getFilePath());
                     }
