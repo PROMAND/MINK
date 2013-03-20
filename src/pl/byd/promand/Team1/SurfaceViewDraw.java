@@ -41,6 +41,9 @@ public class SurfaceViewDraw extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawPath(path, paint);
+        if(ModelRoot.getRoot().getTool().equals("rectangle")){
+            drawRectangle(canvas);    //Just for testing
+        }
     }
 
     @Override
@@ -72,6 +75,11 @@ public class SurfaceViewDraw extends View {
     @Override
     public void setBackgroundColor(int color) {
         super.setBackgroundColor(color);
+    }
+         //This one is just for testing and does not work property
+    public void drawRectangle(Canvas canvas){
+        paint.setColor(Color.BLUE);
+        canvas.drawRect(getX(),getY(),getX()+180, getY()+180, paint);
     }
 }
 
