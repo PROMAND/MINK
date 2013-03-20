@@ -8,7 +8,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/upbutton2"
             android:showAsAction="always"
-            android:background="@drawable/add_new"/>
+            android:icon="@drawable/add_new"
+            />
     <item
             android:textStyle="bold"
             android:typeface="sans"
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/upbutton3"
             android:showAsAction="always"
-            android:background="@drawable/save_icon"/>
+            android:icon="@drawable/save_icon"/>
     <item
             android:textStyle="bold"
             android:typeface="sans"
@@ -24,5 +25,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/upbutton4"
             android:showAsAction="always"
-            android:background="@drawable/share"/>
+            android:icon="@drawable/share"/>
 </menu>

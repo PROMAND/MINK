@@ -5,43 +5,6 @@
     android:orientation="vertical"
     tools:context=".Main" >
 
-    <!--Top buttons-->
-    <LinearLayout android:id="@+id/TopLayout"
-            android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:weightSum="4" android:layout_alignParentTop="true"
-            >
-        <ImageButton
-                android:id="@+id/upbutton1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/logopic1" />
-
-        <ImageButton
-                android:id="@+id/upbutton2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/add_new" />
-        <ImageButton
-                android:id="@+id/upbutton3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/save_icon" />
-
-
-        <ImageButton
-                android:id="@+id/upbutton4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/share"/>
-
-    </LinearLayout>
-
     <!--<pl.byd.promand.Team1.SurfaceViewDraw
             android:id="@+id/SurfaceViewLayout"
             android:layout_width="fill_parent"
@@ -50,13 +13,20 @@
             android:layout_marginBottom="10dp" android:layout_below="@+id/TopLayout"
             android:layout_above="@+id/BottomLayout"/>-->
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/forSurfaceViewDraw"
+            android:layout_above="@+id/BottomLayout">
+            </LinearLayout>
+
 
     <!--Bottom buttons-->
     <LinearLayout android:id="@+id/BottomLayout"
             android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:weightSum="4" android:layout_alignParentBottom="true"
+                  android:weightSum="3" android:layout_alignParentBottom="true"
             >
 
         <Button
@@ -86,7 +56,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dButton4" />
+                android:text="@string/dButton4"
+                android:visibility="gone"/>
 
     </LinearLayout>
 
