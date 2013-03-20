@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -16,6 +17,8 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.promand.Team1.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MyActivity extends SherlockActivity {
@@ -32,7 +35,16 @@ public class MyActivity extends SherlockActivity {
         getSupportMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+    public boolean OnOptionItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.upbutton4:
+                taptoshare();
+            return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
+    }
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -425,4 +437,35 @@ public class MyActivity extends SherlockActivity {
         toast.show();
 
     }
+    public void taptoshare()
+    {
+//        View content = findViewById(R.id.SurfaceViewLayout);
+        View content = MyActivity.view;
+        content.setDrawingCacheEnabled(true);
+        Bitmap bitmap = content.getDrawingCache();
+        File file = new File(getExternalCacheDir(), "image.jpg");
+        try
+        {
+            file.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+            ostream.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        share.putExtra(Intent.EXTRA_STREAM,
+                Uri.parse("file:///" + file.getAbsolutePath()));
+
+        startActivity(Intent.createChooser(share, "Share Image"));
+
+    }
+
 }
