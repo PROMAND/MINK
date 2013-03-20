@@ -90,8 +90,51 @@ public class MyActivity extends Activity {
 
         width.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, WidthMainActivity.class);
-                startActivityForResult(i, 2);
+              //  Intent i = new Intent(context, WidthMainActivity.class);
+             //   startActivityForResult(i, 2);
+
+                final Dialog dialogWidth = new Dialog(context);
+
+                dialogWidth.setContentView(R.layout.activity_width_main);
+                SeekBar bar = (SeekBar) dialogWidth.findViewById(R.id.seekbar);
+                final TextView txtNumbers = (TextView) dialogWidth.findViewById(R.id.TextView01);
+                Button SetWidth = (Button)dialogWidth.findViewById(R.id.bSetWidth);
+
+
+                SetWidth.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        dialogWidth.dismiss();
+                    }
+                });
+
+
+                bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar arg0) {
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar arg0) {
+
+                    }
+
+                    @Override
+                    public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+                        txtNumbers.setText(String.valueOf(arg1));
+                        ModelRoot.getRoot().setWidth(String.valueOf(arg1));
+                     }
+                });
+
+                dialogWidth.show();
+
+
+
+
             }
         });
 
