@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.content.res.Configuration;
 import android.widget.ImageButton;
 import com.promand.Team1.R;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.content.Intent;
 
-public class Tools extends Activity {
+public class ToolsActivity extends Activity {
 
      ImageButton btnBrush;
      ImageButton btnPen;
@@ -26,10 +27,10 @@ public class Tools extends Activity {
      ImageButton btnCircle;
      ImageButton btnRectangle;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tools);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tools);
 
        btnBrush = (ImageButton) findViewById(R.id.button1);
        btnPen = (ImageButton) findViewById(R.id.button4);

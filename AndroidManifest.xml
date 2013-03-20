@@ -32,18 +32,23 @@
         </activity>
 
         <activity
-                android:name="pl.byd.promand.Team1.Tools"
+                android:name="pl.byd.promand.Team1.ToolsActivity"
                 android:label="Tools" >
         </activity>
 
         <activity
-                android:name="pl.byd.promand.Team1.WidthMain"
+                android:name="pl.byd.promand.Team1.WidthMainActivity"
                 android:label="Width" >
         </activity>
 
         <activity
                 android:name="pl.byd.promand.Team1.OpenFileActivity"
                 android:label="Open File">
+        </activity>
+
+        <activity
+                android:name="pl.byd.promand.Team1.ColorChangeActivity"
+                android:label="Select Color">
         </activity>
     </application>
 </manifest> 

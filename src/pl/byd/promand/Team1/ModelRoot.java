@@ -10,6 +10,7 @@ public class ModelRoot {
     private Bitmap bitmap;
     private String filePath;
     private String previousPath;      //required for OpenFileActivity... and probably for saving file
+    private boolean landscape = false;
     private  String tool="pen";
     private Drawable toolI;
 
@@ -75,6 +76,13 @@ public class ModelRoot {
 
     }
 
+    public boolean isLandscape() {
+        return landscape;
+    }
+
+    public void setLandscape(boolean landscape) {
+        this.landscape = landscape;
+    }
 }
 
 

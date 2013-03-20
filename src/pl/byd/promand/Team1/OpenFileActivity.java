@@ -1,6 +1,7 @@
 package pl.byd.promand.Team1;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;

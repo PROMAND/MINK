@@ -2,6 +2,7 @@ package pl.byd.promand.Team1;
 
 //import com.example.R;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -11,7 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import com.promand.Team1.R;
 
-public class WidthMain extends Activity {
+public class WidthMainActivity extends Activity {
 
     SeekBar bar;
     TextView txtNumbers;

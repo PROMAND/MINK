@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -126,56 +127,6 @@ public class SettingsActivity extends Activity {
         loadImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                /*final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.load);
-                dialog.setTitle("Choose the folder");
-
-                final ListView folderLoad = (ListView) dialog.findViewById(R.id.lFolderLoad);
-                folderLoad.setClickable(true);
-
-                Button load = (Button) dialog.findViewById(R.id.bLoad);
-                Button exit = (Button) dialog.findViewById(R.id.bExit1);
-
-
-                final Folders folder = new Folders();
-                folder.setCurrentPath(Environment.getExternalStorageDirectory());
-
-               final ArrayList<String> values = new ArrayList<String>(folder.getListOfFolders());
-
-                 ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                        (context, R.layout.adapter, R.id.tFolderName, values);
-
-                folderLoad.setAdapter(adapter);
-
-                folderLoad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-                    String s = values.get(position);
-                    Toast.makeText(SettingsActivity.this, "Folder: "+s, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-
-                exit.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                load.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        /*//*********************************
-                        //loading image
-                        /*//**********************************
-                    }
-
-                });
-
-                dialog.show();*/
             }
         });
 

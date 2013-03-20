@@ -42,15 +42,13 @@
 
     </LinearLayout>
 
-    <!--LinearLayout holding SurfaceView-->
-    <LinearLayout
+    <!--<pl.byd.promand.Team1.SurfaceViewDraw
             android:id="@+id/SurfaceViewLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="10dp" android:layout_marginTop="10dp" android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp" android:layout_below="@+id/TopLayout"
-            android:layout_above="@+id/BottomLayout">
-    </LinearLayout>
+            android:layout_above="@+id/BottomLayout"/>-->
 
 
     <!--Bottom buttons-->

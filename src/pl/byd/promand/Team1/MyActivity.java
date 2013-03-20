@@ -5,35 +5,20 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.*;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.promand.Team1.R;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-public class MyActivity extends Activity implements View.OnTouchListener {
+public class MyActivity extends Activity {
 
-  public static SurfaceViewDraw view;
+    public static SurfaceViewDraw view;
     Context context = this;
-    LinearLayout surfaceViewLayout;
-
-
-    float x, y, r;
-    boolean mIsDrawing=false;
-
-
-    Paint mPaint;
-    int color = Color.GREEN;
-    int backgroundColor = Color.WHITE;
     private Dialog start;
     String path;
     private Button tools;
@@ -45,6 +30,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        //Start dialog
         start = new Dialog(context);
         start.setTitle("Let's start");
         start.setContentView(R.layout.start_dialog);
@@ -88,43 +74,23 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             }
         });
 
+        //Main screen (bottom buttons)
         tools = (Button) findViewById(R.id.button1);
         Button width = (Button) findViewById(R.id.button2);
         width.setText(width.getText() + ": " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
         Button settings = (Button) findViewById(R.id.button4);
 
-        surfaceViewLayout = (LinearLayout)findViewById(R.id.SurfaceViewLayout);
-       // sv = (SurfaceView)findViewById(R.id.surface);
-
-        surfaceViewLayout = (LinearLayout) findViewById(R.id.SurfaceViewLayout);
-        ImageButton AddNew = (ImageButton) findViewById(R.id.upbutton2);
-        ImageButton SaveButton = (ImageButton) findViewById(R.id.upbutton3);
-        ImageButton taptoshare = (ImageButton) findViewById(R.id.upbutton4);
-        x=0;
-        y=0;
-        r=0;
-
-        //drawing surface class
-        view = new SurfaceViewDraw(context, surfaceViewLayout.getWidth(),surfaceViewLayout.getHeight());
-        view.setOnTouchListener(this);
-
-      //  mPaint = new Paint();
-      //  mPaint.setColor(Color.GREEN);
-
-
-
-
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, Tools.class);
+                Intent i = new Intent(context, ToolsActivity.class);
                 startActivityForResult(i,5);
             }
         });
 
         width.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, WidthMain.class);
+                Intent i = new Intent(context, WidthMainActivity.class);
                 startActivityForResult(i, 2);
             }
         });
@@ -145,11 +111,12 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             }
         });
 
+        //Main screen (top buttons) - will be replaced with Action bar
+        ImageButton addNew = (ImageButton) findViewById(R.id.upbutton2);
+        ImageButton saveButton = (ImageButton) findViewById(R.id.upbutton3);
+        ImageButton shareButton = (ImageButton) findViewById(R.id.upbutton4);
 
-
-
-
-        AddNew.setOnClickListener(new View.OnClickListener() {
+        addNew.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 final Dialog dialog = new Dialog(context);
@@ -181,7 +148,7 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             }
         });
 
-        SaveButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 final Dialog dialog = new Dialog(context);
@@ -214,7 +181,6 @@ public class MyActivity extends Activity implements View.OnTouchListener {
                 });
 
 
-
                 exit.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
@@ -234,39 +200,40 @@ public class MyActivity extends Activity implements View.OnTouchListener {
             }
         });
 
-        surfaceViewLayout.addView(view);
+        view = new SurfaceViewDraw(this);
+        view.setBackgroundColor(Color.WHITE);
+        Display display = getWindowManager().getDefaultDisplay();
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(display.getWidth(), (display.getHeight()-150));
+        addContentView(view, params);
     }
 
+    //Functionality
     @Override
     protected void onResume() {
         super.onResume();
-
+      
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
-
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == 1) {
-
+            start.dismiss();
         }
 
         if (resultCode == 2) {
+            start.dismiss();
             Button widthB = (Button) findViewById(R.id.button2);
             widthB.setText("Width: " + ModelRoot.getRoot().getWidth());
         }
 
         if (resultCode == 3) {
-            Bitmap tempBitmap = ModelRoot.getRoot().getBitmap();
-          // SurfaceView photoSurface = new SurfaceViewDraw(context, tempBitmap);
-         //  surfaceViewLayout.addView(photoSurface);
-
+            start.dismiss();
         }
 
         if (resultCode == 4) {
@@ -275,48 +242,9 @@ public class MyActivity extends Activity implements View.OnTouchListener {
         }
 
         if(resultCode==5){
-            tools.setCompoundDrawables(null,null,ModelRoot.getRoot().getToolI(),null);
+            tools.setCompoundDrawables(null, null, ModelRoot.getRoot().getToolI(), null);
+            start.dismiss();
         }
 
     }
-
-
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event)
-    {
-
-        x = event.getX();
-        y = event.getY();
-        r = Float.parseFloat(ModelRoot.getRoot().getWidth());
-
-        if(event.getAction()==MotionEvent.ACTION_DOWN){
-            view.startDraw((int)event.getX(), (int)event.getY(),(int)r, color,
-                    backgroundColor);
-            mIsDrawing=true;
-            return true;
-        }
-        else if(event.getAction()==MotionEvent.ACTION_UP){
-            mIsDrawing=false;
-            return true;
-        }
-        else if(event.getAction()==MotionEvent.ACTION_MOVE)
-        {
-            if(mIsDrawing)
-            {
-                view.changeColor(color);
-                //now, draw where finger was dragging
-                view.continueDraw((int)event.getX(), (int)event.getY(),(int)r);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        return false;
-    }
-
 }
