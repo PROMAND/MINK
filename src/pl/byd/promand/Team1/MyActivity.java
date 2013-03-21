@@ -34,6 +34,7 @@ public class MyActivity extends SherlockActivity {
     private Dialog start;
     String path;
     private Button tools;
+    private Bundle savedInstanceState;
 
 
     @Override
@@ -60,7 +61,7 @@ public class MyActivity extends SherlockActivity {
                 newFile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        view.setBackgroundColor(Color.WHITE);
+                        MyActivity.this.onCreate(savedInstanceState);
                         start.dismiss();
                     }
                 });
@@ -140,6 +141,36 @@ public class MyActivity extends SherlockActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        this.savedInstanceState = savedInstanceState;
+
+        if (ModelRoot.getRoot().isStart()) {
+            final Dialog orient = new Dialog(MyActivity.this);
+            orient.setTitle("Select in which orientation you will work");
+            orient.setCancelable(false);
+            orient.setContentView(R.layout.port_or_land);
+
+            ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
+            ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
+
+            portB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    orient.dismiss();
+                }
+            });
+
+            landB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    orient.dismiss();
+                }
+            });
+
+            orient.show();
+            ModelRoot.getRoot().setStart(false);
+        }
 
         //Main screen (bottom buttons)
         tools = (Button) findViewById(R.id.button1);
