@@ -231,7 +231,7 @@ public class MyActivity extends SherlockActivity {
 
                 });
 
-                btnFiller.setOnClickListener(new View.OnClickListener() {
+            /*    btnFiller.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showToastMessage("FILLER has been chosen");
@@ -241,7 +241,7 @@ public class MyActivity extends SherlockActivity {
                     }
 
 
-                });
+                });    */
 
                 btnLine.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -700,6 +700,18 @@ public class MyActivity extends SherlockActivity {
         if (resultCode == 4) {
             view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
         }
+
+
+        if (resultCode == 0) {
+
+            Bundle extras = data.getExtras();
+            Bitmap photo = (Bitmap) extras.get("data");
+            ModelRoot.getRoot().setBitmap(photo);
+            start.dismiss();
+        }
+
+
+
     }
 
     private void showToastMessage(String msg) {
