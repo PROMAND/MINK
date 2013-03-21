@@ -129,8 +129,8 @@ public class MyActivity extends SherlockActivity {
                 btnBrush.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("BRUSH has chosen");
-                        ModelRoot.getRoot().setTool("brush");
+                        showToastMessage("BRUSH has been chosen");
+                        ModelRoot.getRoot().setTool(1);
                         ModelRoot.getRoot().setToolI(btnBrush.getDrawable());
                         toolD.dismiss();
                     }
@@ -141,8 +141,8 @@ public class MyActivity extends SherlockActivity {
                 btnPen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("PEN has chosen");
-                        ModelRoot.getRoot().setTool("pen");
+                        showToastMessage("PEN has been chosen");
+                        ModelRoot.getRoot().setTool(2);
                         ModelRoot.getRoot().setToolI(btnPen.getDrawable());
                         toolD.dismiss();
                     }
@@ -153,8 +153,8 @@ public class MyActivity extends SherlockActivity {
                 btnEraser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("ERASER has chosen");
-                        ModelRoot.getRoot().setTool("eraser");
+                        showToastMessage("ERASER has been chosen");
+                        ModelRoot.getRoot().setTool(6);
                         ModelRoot.getRoot().setToolI(btnEraser.getDrawable());
                         toolD.dismiss();
                     }
@@ -165,8 +165,8 @@ public class MyActivity extends SherlockActivity {
                 btnFiller.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("FILLER has chosen");
-                        ModelRoot.getRoot().setTool("filler");
+                        showToastMessage("FILLER has been chosen");
+                        ModelRoot.getRoot().setBackColor(ModelRoot.getRoot().getColor());
                         ModelRoot.getRoot().setToolI(btnFiller.getDrawable());
                         toolD.dismiss();
                     }
@@ -177,8 +177,8 @@ public class MyActivity extends SherlockActivity {
                 btnLine.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("LINE has chosen");
-                        ModelRoot.getRoot().setTool("fill");
+                        showToastMessage("LINE has been chosen");
+                        ModelRoot.getRoot().setTool(3);
                         ModelRoot.getRoot().setToolI(btnLine.getDrawable());
                         toolD.dismiss();
                     }
@@ -187,8 +187,8 @@ public class MyActivity extends SherlockActivity {
                 btnCurvedLine.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("CURVED LINE has chosen");
-                        ModelRoot.getRoot().setTool("curved_line");
+                        showToastMessage("CURVED LINE has been chosen");
+                        ModelRoot.getRoot().setTool(8);
                         ModelRoot.getRoot().setToolI(btnCurvedLine.getDrawable());
                         toolD.dismiss();
                     }
@@ -199,8 +199,8 @@ public class MyActivity extends SherlockActivity {
                 btnText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("TEXT has chosen");
-                        ModelRoot.getRoot().setTool("text");
+                        showToastMessage("TEXT has been chosen");
+                        ModelRoot.getRoot().setTool(9);
                         ModelRoot.getRoot().setToolI(btnText.getDrawable());
                         toolD.dismiss();
                     }
@@ -211,8 +211,8 @@ public class MyActivity extends SherlockActivity {
                 btnCircle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("CIRCLE has chosen");
-                        ModelRoot.getRoot().setTool("circle");
+                        showToastMessage("CIRCLE has been chosen");
+                        ModelRoot.getRoot().setTool(4);
                         ModelRoot.getRoot().setToolI(btnCircle.getDrawable());
                         toolD.dismiss();
                     }
@@ -223,8 +223,8 @@ public class MyActivity extends SherlockActivity {
                 btnRectangle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToastMessage("RECTANGLE has chosen");
-                        ModelRoot.getRoot().setTool("rectangle");
+                        showToastMessage("RECTANGLE has been chosen");
+                        ModelRoot.getRoot().setTool(5);
                         ModelRoot.getRoot().setToolI(btnRectangle.getDrawable());
                         toolD.dismiss();
                     }

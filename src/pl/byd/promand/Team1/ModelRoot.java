@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
@@ -10,8 +11,11 @@ public class ModelRoot {
     private String filePath;
     private ArrayList<String> previousPath = new ArrayList<String>();  //required for OpenFileActivity... and probably for saving file
     private boolean landscape = false;
-    private  String tool="pen";
+    private  int tool=3;
     private Drawable toolI;
+    private String backgroundColor = "#FFFFF0";
+
+    public Paint paint = new Paint();
 
     private final static ModelRoot root = new ModelRoot();
     public static ModelRoot getRoot() {
@@ -50,11 +54,11 @@ public class ModelRoot {
         this.previousPath = previousPath;
     }
 
-    public String getTool() {
+    public int getTool() {
         return tool;
     }
 
-    public void setTool(String tool){
+    public void setTool(int tool){
         this.tool =tool;
     }
 
@@ -74,6 +78,23 @@ public class ModelRoot {
     public void setLandscape(boolean landscape) {
         this.landscape = landscape;
     }
+
+    public Paint getPaint() {
+        return paint;
+    }
+
+    public void setPaint(Paint paint){
+        this.paint = paint;
+    }
+
+    public String getBackColor() {
+        return backgroundColor;
+    }
+
+    public void setBackColor(String color) {
+        this.backgroundColor = color;
+    }
+
 }
 
 
