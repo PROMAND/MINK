@@ -2,7 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="@color/abs__bright_foreground_disabled_holo_light">
+                android:layout_height="match_parent" android:background="#1e1e1e">
     <EditText
             android:layout_width="110dp"
             android:layout_height="wrap_content"
@@ -15,14 +15,14 @@
             android:text="@string/red"
             android:id="@+id/red"
             android:layout_alignLeft="@+id/colourHeader" android:layout_alignParentTop="true"
-            android:layout_marginTop="30dp" android:textSize="18sp" android:textColor="@android:color/black"
+            android:layout_marginTop="30dp" android:textSize="18sp" android:textColor="@android:color/white"
             android:singleLine="true" android:layout_marginLeft="10dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/green"
             android:id="@+id/green"
-            android:textSize="18sp" android:textColor="@android:color/black"
+            android:textSize="18sp" android:textColor="@android:color/white"
             android:singleLine="true" android:layout_alignLeft="@+id/red" android:layout_below="@+id/seekBarRed"
             android:layout_marginTop="6dp"/>
     <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="@string/blue"
             android:id="@+id/blue"
-            android:textSize="18sp" android:textColor="@android:color/black"
+            android:textSize="18sp" android:textColor="@android:color/white"
             android:singleLine="true" android:layout_alignLeft="@+id/red" android:layout_below="@+id/seekBarGreen"
             android:layout_marginTop="6dp"/>
     <SeekBar
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/redInNumbers"
             android:text="@string/zero"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:layout_toRightOf="@+id/seekBarRed"
             android:layout_alignTop="@+id/red"
@@ -74,7 +74,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/greenInNumbers"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:text="@string/zero"
             android:layout_alignLeft="@+id/redInNumbers"
@@ -84,7 +84,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/blueInNumbers"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:text="@string/zero"
             android:layout_alignLeft="@+id/redInNumbers"
@@ -95,7 +95,7 @@
             android:layout_height="40dp"
             android:id="@+id/whiteB"
             android:background="@android:color/white"
-            android:layout_alignLeft="@+id/red" android:layout_below="@+id/selectB"/>
+            android:layout_alignLeft="@+id/red" android:layout_below="@+id/selectB" android:layout_marginTop="10dp"/>
     <ImageButton android:layout_width="40dp" android:layout_height="40dp" android:id="@+id/redB"
                  android:layout_toRightOf="@+id/green" android:layout_alignTop="@+id/whiteB"
                  android:background="#ff0000"/>

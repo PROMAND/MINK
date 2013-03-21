@@ -96,7 +96,7 @@
         <ImageButton
                 android:id="@+id/button6"
 
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 
                 android:layout_alignBottom="@+id/button2"
@@ -116,7 +116,7 @@
                 android:layout_below="@+id/button7"
                 android:src="@drawable/curved_line"
                 android:text="@string/curvedLine"
-                android:layout_weight="1"/>
+                android:layout_weight="1" android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -147,7 +147,7 @@
         <ImageButton
                 android:id="@+id/button9"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_alignBottom="@+id/button6"
                 android:layout_alignLeft="@+id/button7"
                 android:layout_alignRight="@+id/button9"
@@ -179,7 +179,7 @@
 
                 android:src="@drawable/texting"
                 android:text="@string/text"
-                android:layout_weight="1" />
+                android:layout_weight="1" android:visibility="gone"/>
 
     </LinearLayout>
 

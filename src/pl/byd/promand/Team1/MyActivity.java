@@ -61,6 +61,7 @@ public class MyActivity extends SherlockActivity {
                     @Override
                     public void onClick(View v) {
                         MyActivity.this.onCreate(savedInstanceState);
+                        ModelRoot.getRoot().setBitmap(null);
                         start.dismiss();
                     }
                 });
