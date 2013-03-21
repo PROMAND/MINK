@@ -33,7 +33,6 @@ public class MyActivity extends SherlockActivity {
     public static SurfaceViewDraw view;
     Context context = this;
     private Dialog start;
-    String path;
     private Button tools;
     private Bundle savedInstanceState;
 
@@ -91,6 +90,37 @@ public class MyActivity extends SherlockActivity {
                         finish();
                     }
                 });
+
+                start.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        final Dialog orient = new Dialog(MyActivity.this);
+                        orient.setTitle("Select in which orientation you will work");
+                        orient.setCancelable(false);
+                        orient.setContentView(R.layout.port_or_land);
+
+                        ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
+                        ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
+
+                        portB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                orient.dismiss();
+                            }
+                        });
+
+                        landB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                orient.dismiss();
+                            }
+                        });
+
+                        orient.show();
+                    }
+                });
                 break;
             }
             case R.id.upbutton4: {
@@ -99,46 +129,13 @@ public class MyActivity extends SherlockActivity {
             }
             case R.id.upbutton3: {
                 taptosave();
+                break;
             }
             default: {
                 break;
             }
         }
-
-        start.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                final Dialog orient = new Dialog(MyActivity.this);
-                orient.setTitle("Select in which orientation you will work");
-                orient.setCancelable(false);
-                orient.setContentView(R.layout.port_or_land);
-
-                ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
-                ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
-
-                portB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                        orient.dismiss();
-                    }
-                });
-
-                landB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                        orient.dismiss();
-                    }
-                });
-
-                orient.show();
-            }
-        });
         return true;
-    }
-
-    private void saveAsJpg() {
     }
 
     @Override
@@ -715,15 +712,15 @@ public class MyActivity extends SherlockActivity {
 //        String imgname = null;
         File file = new File("/mnt/sdcard/Pictures/test");
         try {
-        fOut = new FileOutputStream(file);
+            fOut = new FileOutputStream(file);
 
-        Bitmap bitmap = view.getDrawingCache();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
-        fOut.flush();
-        fOut.close();
+            Bitmap bitmap = view.getDrawingCache();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+            fOut.flush();
+            fOut.close();
 
 
-            MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+            MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (IOException e) {
@@ -731,21 +728,4 @@ public class MyActivity extends SherlockActivity {
         }
 
     }
-//public void saveAsJpg (File f)
-//{
-//    String fname = f.getAbsolutePath ();
-//    FileOutputStream fos = null;
-//    try
-//    {
-//        fos = new FileOutputStream (f);
-//        Bitmap mBitmap = view.getDrawingCache();
-//        mBitmap.compress (Bitmap.CompressFormat.JPEG, 95, fos);
-//        Toast.makeText (getApplicationContext(), "Saved " + fname, Toast.LENGTH_LONG).show ();
-//    }
-//    catch (Throwable ex)
-//    {
-//        Toast.makeText (getApplicationContext(), "Error: " + ex.getMessage (), Toast.LENGTH_LONG).show ();
-//        ex.printStackTrace ();
-//    }
-//}
 }
