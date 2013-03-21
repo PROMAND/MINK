@@ -1,15 +1,17 @@
 package pl.byd.promand.Team1;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 
+import android.provider.MediaStore;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -23,14 +25,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyActivity extends SherlockActivity {
 
     public static SurfaceViewDraw view;
     Context context = this;
     private Dialog start;
-    String path;
     private Button tools;
+    private Bundle savedInstanceState;
 
 
     @Override
@@ -57,6 +61,7 @@ public class MyActivity extends SherlockActivity {
                 newFile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MyActivity.this.onCreate(savedInstanceState);
                         start.dismiss();
                     }
                 });
@@ -85,10 +90,46 @@ public class MyActivity extends SherlockActivity {
                         finish();
                     }
                 });
+
+                start.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        final Dialog orient = new Dialog(MyActivity.this);
+                        orient.setTitle("Select in which orientation you will work");
+                        orient.setCancelable(false);
+                        orient.setContentView(R.layout.port_or_land);
+
+                        ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
+                        ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
+
+                        portB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                orient.dismiss();
+                            }
+                        });
+
+                        landB.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                orient.dismiss();
+                            }
+                        });
+
+                        orient.show();
+                    }
+                });
                 break;
             }
             case R.id.upbutton4: {
                 taptoshare();
+                break;
+            }
+            case R.id.upbutton3: {
+                taptosave();
+                break;
             }
             default: {
                 break;
@@ -101,6 +142,36 @@ public class MyActivity extends SherlockActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        this.savedInstanceState = savedInstanceState;
+
+        if (ModelRoot.getRoot().isStart()) {
+            final Dialog orient = new Dialog(MyActivity.this);
+            orient.setTitle("Select in which orientation you will work");
+            orient.setCancelable(false);
+            orient.setContentView(R.layout.port_or_land);
+
+            ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
+            ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
+
+            portB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    orient.dismiss();
+                }
+            });
+
+            landB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    orient.dismiss();
+                }
+            });
+
+            orient.show();
+            ModelRoot.getRoot().setStart(false);
+        }
 
         //Main screen (bottom buttons)
         tools = (Button) findViewById(R.id.button1);
@@ -290,8 +361,273 @@ public class MyActivity extends SherlockActivity {
 
         colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, ColorChangeActivity.class);
-                startActivityForResult(i, 1);
+                final Dialog colorD = new Dialog(MyActivity.this);
+                colorD.setTitle("Select color");
+                colorD.setCancelable(true);
+                colorD.setContentView(R.layout.color_selector);
+
+                final SeekBar redSeek = (SeekBar) colorD.findViewById(R.id.seekBarRed);
+                final SeekBar greenSeek = (SeekBar) colorD.findViewById(R.id.seekBarGreen);
+                final SeekBar blueSeek = (SeekBar) colorD.findViewById(R.id.seekBarBlue);
+                final EditText hexColor = (EditText) colorD.findViewById(R.id.colorInHex);
+                redSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                        TextView redText = (TextView) colorD.findViewById(R.id.redInNumbers);
+                        redText.setText(String.valueOf(progress));
+
+                        String r = Integer.toHexString(progress).length() < 2 ? 0 + Integer.toHexString(progress) : Integer.toHexString(progress);
+                        String g = Integer.toHexString(greenSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(greenSeek.getProgress()) :
+                                Integer.toHexString(greenSeek.getProgress());
+                        String b = Integer.toHexString(blueSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(blueSeek.getProgress()) :
+                                Integer.toHexString(blueSeek.getProgress());
+                        String hexCode = r + g + b;
+                        hexColor.setText("#" + hexCode.toUpperCase());
+
+                        hexColor.setBackgroundColor(Color.parseColor("#" + hexCode));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                greenSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        TextView greenText = (TextView) colorD.findViewById(R.id.greenInNumbers);
+                        greenText.setText(String.valueOf(progress));
+
+                        String r = Integer.toHexString(redSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(redSeek.getProgress()) :
+                                Integer.toHexString(redSeek.getProgress());
+                        String g = Integer.toHexString(progress).length() < 2 ? 0 + Integer.toHexString(progress) : Integer.toHexString(progress);
+                        String b = Integer.toHexString(blueSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(blueSeek.getProgress()) :
+                                Integer.toHexString(blueSeek.getProgress());
+                        String hexCode = r + g + b;
+                        hexColor.setText("#" + hexCode.toUpperCase());
+                        hexColor.setBackgroundColor(Color.parseColor("#" + hexCode));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+                blueSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        TextView blueText = (TextView) colorD.findViewById(R.id.blueInNumbers);
+                        blueText.setText(String.valueOf(progress));
+
+                        String r = Integer.toHexString(redSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(redSeek.getProgress()) :
+                                Integer.toHexString(redSeek.getProgress());
+                        String g = Integer.toHexString(greenSeek.getProgress()).length() < 2 ? 0 + Integer.toHexString(greenSeek.getProgress()) :
+                                Integer.toHexString(greenSeek.getProgress());
+                        String b = Integer.toHexString(progress).length() < 2 ? 0 + Integer.toHexString(progress) :
+                                Integer.toHexString(progress);
+                        String hexCode = r + g + b;
+                        hexColor.setText("#" + hexCode.toUpperCase());
+                        hexColor.setBackgroundColor(Color.parseColor("#" + hexCode));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+
+                Button selectColor = (Button) colorD.findViewById(R.id.selectB);
+                selectColor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String color = hexColor.getText().toString();
+                        if (color.length() > 5 && color.length() < 8) {
+                            Pattern p = Pattern.compile("[0-9a-fA-F]{6}");
+                            Matcher m = p.matcher(color);
+                            if (m.find() && m.group().length() == 6) {
+                                if (color.length() == 6) {
+                                    color = "#" + color;
+                                }
+                                ModelRoot.getRoot().setColor(color);
+                                Toast.makeText(MyActivity.this, "Color selected", 5000).show();
+                                setResult(1, getIntent());
+                                colorD.dismiss();
+                            } else {
+                                final AlertDialog.Builder alert = new AlertDialog.Builder(MyActivity.this);
+                                alert.setTitle("Error!");
+                                alert.setMessage("Please enter a valid hexadecimal color representation");
+                                alert.setCancelable(true);
+                                alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                alert.show();
+                            }
+                        } else {
+                            final AlertDialog.Builder alert = new AlertDialog.Builder(MyActivity.this);
+                            alert.setTitle("Error!");
+                            alert.setMessage("Please enter a valid hexadecimal color representation");
+                            alert.setCancelable(true);
+                            alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            alert.show();
+                        }
+                    }
+                });
+
+
+                hexColor.clearFocus();
+
+                hexColor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hexColor.setText("");
+                    }
+                });
+
+                hexColor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        String color = hexColor.getText().toString();
+                        hexColor.setText("#" + hexColor.getText().toString());
+                        if (color.length() == 6) {
+                            Pattern p = Pattern.compile("[0-9a-fA-F]+");
+                            Matcher m = p.matcher(color);
+                            if (m.find() && m.group().length() == 6) {
+
+                                String colorPart = m.group();
+                                String red = colorPart.substring(0, 1);
+                                String green = colorPart.substring(2, 3);
+                                String blue = colorPart.substring(4, 5);
+
+                                redSeek.setProgress(Integer.parseInt(red, 16));
+                                greenSeek.setProgress(Integer.parseInt(green, 16));
+                                blueSeek.setProgress(Integer.parseInt(blue, 16));
+
+                                ModelRoot.getRoot().setColor(color);
+                                setResult(1, getIntent());
+                            }
+                        }
+                    }
+                });
+
+                final ImageButton whiteB = (ImageButton) colorD.findViewById(R.id.whiteB);
+                final ImageButton redB = (ImageButton) colorD.findViewById(R.id.redB);
+                final ImageButton yellowB = (ImageButton) colorD.findViewById(R.id.yellowB);
+                final ImageButton greenB = (ImageButton) colorD.findViewById(R.id.greenB);
+                final ImageButton blueB = (ImageButton) colorD.findViewById(R.id.blueB);
+                final ImageButton violetB = (ImageButton) colorD.findViewById(R.id.violetB);
+                final ImageButton greyB = (ImageButton) colorD.findViewById(R.id.greyB);
+                final ImageButton blackB = (ImageButton) colorD.findViewById(R.id.blackB);
+
+                whiteB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(255);
+                        greenSeek.setProgress(255);
+                        blueSeek.setProgress(255);
+                        hexColor.setText("#FFFFFF");
+                        hexColor.setTextColor(Color.BLACK);
+                        hexColor.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    }
+                });
+
+                redB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(255);
+                        greenSeek.setProgress(0);
+                        blueSeek.setProgress(0);
+                        hexColor.setText("#FF0000");
+                        hexColor.setBackgroundColor(Color.parseColor("#FF0000"));
+                    }
+                });
+
+                yellowB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(255);
+                        greenSeek.setProgress(255);
+                        blueSeek.setProgress(0);
+                        hexColor.setText("#FFFF00");
+                        hexColor.setTextColor(Color.BLACK);
+                        hexColor.setBackgroundColor(Color.parseColor("#FFFF00"));
+                    }
+                });
+
+                greenB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(0);
+                        greenSeek.setProgress(255);
+                        blueSeek.setProgress(0);
+                        hexColor.setText("#00FF00");
+                        hexColor.setTextColor(Color.BLACK);
+                        hexColor.setBackgroundColor(Color.parseColor("#00FF00"));
+                    }
+                });
+
+                blueB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(0);
+                        greenSeek.setProgress(0);
+                        blueSeek.setProgress(255);
+                        hexColor.setText("#0000FF");
+                        hexColor.setBackgroundColor(Color.parseColor("#0000FF"));
+                    }
+                });
+
+                violetB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(204);
+                        greenSeek.setProgress(0);
+                        blueSeek.setProgress(255);
+                        hexColor.setText("#CC00FF");
+                        hexColor.setBackgroundColor(Color.parseColor("#CC00FF"));
+                    }
+                });
+
+                greyB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(103);
+                        greenSeek.setProgress(103);
+                        blueSeek.setProgress(103);
+                        hexColor.setText("#676767");
+                        hexColor.setBackgroundColor(Color.parseColor("#676767"));
+                    }
+                });
+
+                blackB.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        redSeek.setProgress(0);
+                        greenSeek.setProgress(0);
+                        blueSeek.setProgress(0);
+                        hexColor.setTextColor(Color.WHITE);
+                        hexColor.setText("#000000");
+                        hexColor.setBackgroundColor(Color.parseColor("#000000"));
+                    }
+                });
+                colorD.show();
+                hexColor.clearFocus();
             }
         });
 
@@ -325,12 +661,6 @@ public class MyActivity extends SherlockActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode == 2) {
-            start.dismiss();
-            Button widthB = (Button) findViewById(R.id.button2);
-            widthB.setText("Width: " + ModelRoot.getRoot().getWidth());
-        }
 
         if (resultCode == 3) {
             start.dismiss();
@@ -375,4 +705,90 @@ public class MyActivity extends SherlockActivity {
 
     }
 
+    public void taptosave() {
+
+        final Dialog saveD = new Dialog(this);
+        saveD.setTitle("Choose name of file");
+        saveD.setContentView(R.layout.save_dialog);
+
+        Button okB = (Button) saveD.findViewById(R.id.okB);
+        Button cancelB = (Button) saveD.findViewById(R.id.cancelB3);
+
+        okB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText fileName = (EditText) saveD.findViewById(R.id.fileName);
+                String imageName = fileName.getText().toString();
+                final File file = new File(getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES).getPath() + imageName + ".jpg");
+                if (file.exists()) {
+                    final Dialog check = new Dialog(MyActivity.this);
+                    check.setTitle("File with same name exists");
+                    check.setContentView(R.layout.check);
+
+                    Button y = (Button) check.findViewById(R.id.yes);
+                    Button n = (Button) check.findViewById(R.id.no);
+
+                    y.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            file.delete();
+                            try {
+                                FileOutputStream fOut = new FileOutputStream(file);
+
+                                Bitmap bitmap = view.getDrawingCache();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                                fOut.flush();
+                                fOut.close();
+
+//                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getPath(), imageName, imageName);
+                                Toast.makeText(MyActivity.this, "Your file is saved to " + file.getAbsolutePath(), 5000).show();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            check.dismiss();
+                        }
+                    });
+
+                    n.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            check.dismiss();
+                            taptosave();
+                        }
+                    });
+
+                    check.show();
+                } else {
+                    try {
+                        FileOutputStream fOut = new FileOutputStream(file);
+
+                        Bitmap bitmap = view.getDrawingCache();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        fOut.flush();
+                        fOut.close();
+
+//                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getPath(), imageName, imageName);
+                        Toast.makeText(MyActivity.this, "Your file is saved to " + file.getAbsolutePath(), 5000).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                saveD.dismiss();
+            }
+        });
+
+        cancelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveD.dismiss();
+            }
+        });
+
+        saveD.show();
+    }
 }

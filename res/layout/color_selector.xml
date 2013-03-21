@@ -5,155 +5,19 @@
                 android:layout_height="fill_parent"
                 android:background="@android:color/darker_gray"
         >
+    <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        <HorizontalScrollView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            <include
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/for_color"/>
+        </HorizontalScrollView>
+    </ScrollView>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/colourHeader"
-            android:id="@+id/colourHeader"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="21dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="15dp"
-            android:textSize="32sp" android:textStyle="bold" android:textColor="@android:color/black"
-            android:singleLine="true"/>
-    <EditText
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/colorInHex"
-            android:hint="@string/colorHint"
-            android:layout_alignLeft="@+id/redInNumbers" android:layout_alignTop="@+id/colourHeader"
-            android:maxLength="7"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/red"
-            android:id="@+id/red"
-            android:layout_alignLeft="@+id/colourHeader" android:layout_alignParentTop="true"
-            android:layout_marginTop="92dp" android:textSize="18sp" android:textColor="@android:color/black"
-            android:singleLine="true"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/green"
-            android:id="@+id/green"
-            android:layout_alignLeft="@+id/colourHeader" android:layout_alignParentTop="true"
-            android:layout_marginTop="132dp" android:textSize="18sp" android:textColor="@android:color/black"
-            android:singleLine="true"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blue"
-            android:id="@+id/blue"
-            android:layout_alignLeft="@+id/colourHeader" android:layout_alignParentTop="true"
-            android:layout_marginTop="172dp" android:textSize="18sp" android:textColor="@android:color/black"
-            android:singleLine="true"/>
-    <SeekBar
-            android:layout_width="255dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarRed"
-            android:layout_centerHorizontal="true"
-            android:layout_alignTop="@+id/red"
-            android:max="255"
-            android:background="@drawable/red_seek_bar" android:layout_toRightOf="@+id/redB"/>
-    <SeekBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarGreen"
-            android:layout_alignLeft="@+id/seekBarRed"
-            android:layout_alignTop="@+id/green"
-            android:layout_alignRight="@+id/seekBarRed"
-            android:max="255"
-            android:background="@drawable/green_seek_bar"/>
-    <SeekBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarBlue"
-            android:layout_alignLeft="@+id/seekBarRed"
-            android:layout_alignTop="@+id/blue"
-            android:layout_alignRight="@+id/seekBarRed"
-            android:max="255"
-            android:background="@drawable/blue_seek_bar"/>
-    <TextView
-            android:layout_width="28dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/redInNumbers"
-            android:text="@string/zero"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_toRightOf="@+id/seekBarRed"
-            android:layout_alignTop="@+id/red"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="25dp"/>
-    <TextView
-            android:layout_width="28dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/greenInNumbers"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:text="@string/zero"
-            android:layout_alignLeft="@+id/redInNumbers"
-            android:layout_alignTop="@+id/green"
-            android:layout_marginTop="5dp"/>
-    <TextView
-            android:layout_width="28dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/blueInNumbers"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:text="@string/zero"
-            android:layout_alignLeft="@+id/redInNumbers"
-            android:layout_alignTop="@+id/blue"
-            android:layout_marginTop="5dp"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/whiteB"
-            android:layout_alignLeft="@+id/colourHeader" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp" android:background="@android:color/white"/>
-    <ImageButton android:layout_width="40dp" android:layout_height="40dp" android:id="@+id/redB"
-                 android:layout_toRightOf="@+id/green" android:layout_alignTop="@+id/whiteB"
-                 android:background="#ff0000"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/yellowB"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="116dp"
-            android:layout_alignTop="@+id/whiteB" android:layout_alignBottom="@+id/whiteB"
-            android:background="#ffff00"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/greenB"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="162dp"
-            android:layout_alignTop="@+id/whiteB" android:background="#00ff00"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/blueB" android:layout_alignParentLeft="true" android:layout_marginLeft="210dp"
-            android:layout_alignTop="@+id/whiteB" android:background="#0000ff"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/violetB" android:layout_alignParentLeft="true" android:layout_marginLeft="260dp"
-            android:layout_alignTop="@+id/whiteB" android:background="#cc00ff"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/greyB"
-            android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/whiteB" android:layout_marginLeft="310dp" android:background="#676767"/>
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/blackB"
-            android:background="@android:color/black"
-            android:layout_toRightOf="@+id/seekBarRed" android:layout_alignTop="@+id/whiteB"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/selectB"
-            android:id="@+id/selectB"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="440dp"
-            android:layout_alignBottom="@+id/red"/>
 
 </RelativeLayout>
 
