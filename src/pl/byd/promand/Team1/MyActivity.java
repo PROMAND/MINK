@@ -178,8 +178,6 @@ public class MyActivity extends SherlockActivity {
         Button width = (Button) findViewById(R.id.button2);
         width.setText(width.getText() + ": " + ModelRoot.getRoot().getWidth());
         Button colors = (Button) findViewById(R.id.button3);
-        Button settings = (Button) findViewById(R.id.button4);
-
         tools.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final Dialog toolD = new Dialog(MyActivity.this);
@@ -490,7 +488,47 @@ public class MyActivity extends SherlockActivity {
                     }
                 });
 
-
+                Button backgroundC = (Button) colorD.findViewById(R.id.changeCol);
+                backgroundC.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String color = hexColor.getText().toString();
+                        if (color.length() > 5 && color.length() < 8) {
+                            Pattern p = Pattern.compile("[0-9a-fA-F]{6}");
+                            Matcher m = p.matcher(color);
+                            if (m.find() && m.group().length() == 6) {
+                                if (color.length() == 6) {
+                                    color = "#" + color;
+                                }
+                                ModelRoot.getRoot().setBackColor(color);
+                                Toast.makeText(MyActivity.this, "Background color selected", 5000).show();
+                                colorD.dismiss();
+                            } else {
+                                final AlertDialog.Builder alert = new AlertDialog.Builder(MyActivity.this);
+                                alert.setTitle("Error!");
+                                alert.setMessage("Please enter a valid hexadecimal color representation");
+                                alert.setCancelable(true);
+                                alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                alert.show();
+                            }
+                        } else {
+                            final AlertDialog.Builder alert = new AlertDialog.Builder(MyActivity.this);
+                            alert.setTitle("Error!");
+                            alert.setMessage("Please enter a valid hexadecimal color representation");
+                            alert.setCancelable(true);
+                            alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            alert.show();
+                        }
+                    }
+                });
                 hexColor.clearFocus();
 
                 hexColor.setOnClickListener(new View.OnClickListener() {
@@ -628,15 +666,6 @@ public class MyActivity extends SherlockActivity {
                 });
                 colorD.show();
                 hexColor.clearFocus();
-            }
-        });
-
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(context, SettingsActivity.class);
-                startActivityForResult(i, 3);
-
             }
         });
 

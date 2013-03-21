@@ -141,4 +141,11 @@
             android:text="@string/selectB"
             android:id="@+id/selectB"
             android:layout_toRightOf="@+id/redInNumbers" android:layout_below="@+id/green"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set background"
+            android:id="@+id/changeCol"
+            android:layout_alignRight="@+id/colorInHex" android:layout_below="@+id/whiteB"
+            android:layout_marginTop="7dp"/>
 </RelativeLayout>

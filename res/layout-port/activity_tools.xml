@@ -71,6 +71,17 @@
                 android:layout_weight="1"
                 />
         <ImageButton
+                android:id="@+id/button6"
+
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+
+                android:layout_alignBottom="@+id/button2"
+
+                android:text="@string/line"
+                android:src="@drawable/line"
+                android:layout_weight="1" />
+        <ImageButton
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -80,7 +91,7 @@
                 android:src="@drawable/fill"
                 android:text="@string/fill"
                 android:layout_weight="1"
-              />
+                android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout
@@ -92,18 +103,6 @@
             android:weightSum="2"
 
             >
-
-        <ImageButton
-                android:id="@+id/button6"
-
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_alignBottom="@+id/button2"
-
-                android:text="@string/line"
-                android:src="@drawable/line"
-                android:layout_weight="1" />
 
         <ImageButton
                 android:id="@+id/button5"
