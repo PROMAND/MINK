@@ -1,5 +1,7 @@
 package pl.byd.promand.Team1;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ public class ModelRoot {
     private String color = "#000000";
     private String width = "3";
     private String filePath;
-    private ArrayList<String> previousPath = new ArrayList<String>();  //required for OpenFileActivity... and probably for saving file
+    private ArrayList<String> previousPath = new ArrayList<String>();
     private boolean landscape = false;
     private  String tool="pen";
     private Drawable toolI;

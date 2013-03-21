@@ -12,15 +12,14 @@
             android:id="@+id/portB"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/portrait"/>
+            android:src="@drawable/portrait" android:layout_marginLeft="58dp"/>
     <ImageButton
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:id="@+id/landB"
             android:src="@drawable/landscape"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="122dp"
-            android:layout_alignTop="@+id/portB"/>
+            android:layout_toRightOf="@+id/textView" android:layout_alignTop="@+id/portB"
+            android:layout_marginLeft="8dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
