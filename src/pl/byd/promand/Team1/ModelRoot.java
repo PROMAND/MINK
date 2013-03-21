@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ public class ModelRoot {
     private  int tool=3;
     private Drawable toolI;
     private String backgroundColor = "#FFFFF0";
+    private Bitmap bitmap;
 
     public Paint paint = new Paint();
 
@@ -106,6 +108,13 @@ public class ModelRoot {
         this.backgroundColor = color;
     }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 }
 
 

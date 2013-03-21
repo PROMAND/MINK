@@ -644,6 +644,8 @@ public class MyActivity extends SherlockActivity {
         view.setBackgroundColor(Color.WHITE);
         LinearLayout layout = (LinearLayout) findViewById(R.id.forSurfaceViewDraw);
         layout.addView(view);
+
+        ModelRoot.getRoot().setBitmap(view.getDrawingCache());
     }
 
     //Functionality
