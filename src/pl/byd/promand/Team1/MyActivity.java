@@ -62,7 +62,7 @@ public class MyActivity extends SherlockActivity {
                 ImageButton openFile = (ImageButton) start.findViewById(R.id.loadButton);
                 ImageButton takeAPhoto = (ImageButton) start.findViewById(R.id.takeAPhotoButton);
                 Button exit = (Button) start.findViewById(R.id.exitB);
-
+                final boolean[] newFileCheck = {false};
                 newFile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,6 +73,7 @@ public class MyActivity extends SherlockActivity {
                         ModelRoot.getRoot().setTool(3);
                         ModelRoot.getRoot().setWidth("3");
                         start.dismiss();
+                        newFileCheck[0] = true;
                     }
                 });
 
@@ -83,6 +84,7 @@ public class MyActivity extends SherlockActivity {
                         ModelRoot.getRoot().setFilePath("/mnt");
                         Intent i = new Intent(context, OpenFileActivity.class);
                         startActivityForResult(i, 4);
+                        newFileCheck[0] = false;
                     }
                 });
 
@@ -91,6 +93,7 @@ public class MyActivity extends SherlockActivity {
                     public void onClick(View v) {
                         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(cameraIntent, 1);
+                        newFileCheck[0] = false;
                     }
                 });
 
@@ -104,31 +107,33 @@ public class MyActivity extends SherlockActivity {
                 start.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        final Dialog orient = new Dialog(MyActivity.this);
-                        orient.setTitle("Select in which orientation you will work");
-                        orient.setCancelable(false);
-                        orient.setContentView(R.layout.port_or_land);
+                        if (newFileCheck[0]) {
+                            final Dialog orient = new Dialog(MyActivity.this);
+                            orient.setTitle("Select in which orientation you will work");
+                            orient.setCancelable(false);
+                            orient.setContentView(R.layout.port_or_land);
 
-                        ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
-                        ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
+                            ImageButton portB = (ImageButton) orient.findViewById(R.id.portB);
+                            ImageButton landB = (ImageButton) orient.findViewById(R.id.landB);
 
-                        portB.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                                orient.dismiss();
-                            }
-                        });
+                            portB.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                    orient.dismiss();
+                                }
+                            });
 
-                        landB.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                                orient.dismiss();
-                            }
-                        });
+                            landB.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                    orient.dismiss();
+                                }
+                            });
 
-                        orient.show();
+                            orient.show();
+                        }
                     }
                 });
                 break;
