@@ -18,6 +18,7 @@ public class SurfaceViewDraw extends View {
     Circle circ;
     Pen pntPen;
     Eraser erase;
+    Bitmap tempBitmap=null;
 
     private Paint paint = new Paint();
 
@@ -46,9 +47,18 @@ public class SurfaceViewDraw extends View {
     @Override
     protected void onDraw(Canvas canvas)
     {
-         int tempBackground = Color.parseColor(ModelRoot.getRoot().getBackColor()) ;
-        canvas.drawColor(tempBackground);                              //background color
+        tempBitmap=ModelRoot.getRoot().getBitmap();
+        int  tempBackground = Color.parseColor(ModelRoot.getRoot().getBackColor()) ;
 
+
+        if(tempBitmap==null)
+        {
+            canvas.drawColor(tempBackground);                              //background color
+        }
+        else
+        {
+            canvas.drawBitmap(tempBitmap,0,0,new Paint());               // background bitmap
+        }
 
 
         for (Shape value: shapes)

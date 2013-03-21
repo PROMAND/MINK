@@ -18,7 +18,7 @@ public class ModelRoot {
     private  int tool=3;
     private Drawable toolI;
     private String backgroundColor = "#FFFFF0";
-    private Bitmap bitmap;
+    private Bitmap bitmap=null;
 
     public Paint paint = new Paint();
 
