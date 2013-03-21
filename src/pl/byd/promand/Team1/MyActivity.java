@@ -50,7 +50,6 @@ public class MyActivity extends SherlockActivity {
                 start = new Dialog(context);
                 start.setTitle("Let's start");
                 start.setContentView(R.layout.start_dialog);
-                start.setCancelable(false);
                 start.show();
 
                 ImageButton newFile = (ImageButton) start.findViewById(R.id.newButton);
