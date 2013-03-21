@@ -3,6 +3,7 @@ package pl.byd.promand.Team1;
 
 import android.content.Context;
 import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -57,7 +58,7 @@ public class SurfaceViewDraw extends View {
         }
         else
         {
-            canvas.drawBitmap(tempBitmap,0,0,new Paint());               // background bitmap
+            canvas.drawBitmap(tempBitmap,0,0,null);               // background bitmap
         }
 
 

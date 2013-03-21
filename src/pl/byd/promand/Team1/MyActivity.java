@@ -1,5 +1,6 @@
 package pl.byd.promand.Team1;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,11 +8,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -23,8 +27,10 @@ import com.promand.Team1.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,7 +86,7 @@ public class MyActivity extends SherlockActivity {
                     @Override
                     public void onClick(View v) {
                         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(cameraIntent, 0);
+                        startActivityForResult(cameraIntent, 1);
                     }
                 });
 
@@ -188,7 +194,7 @@ public class MyActivity extends SherlockActivity {
                 final ImageButton btnBrush = (ImageButton) toolD.findViewById(R.id.button1);
                 final ImageButton btnPen = (ImageButton) toolD.findViewById(R.id.button4);
                 final ImageButton btnEraser = (ImageButton) toolD.findViewById(R.id.button3);
-                final ImageButton btnFiller = (ImageButton) toolD.findViewById(R.id.button2);
+                //final ImageButton btnFiller = (ImageButton) toolD.findViewById(R.id.button2);
                 final ImageButton btnLine = (ImageButton) toolD.findViewById(R.id.button6);
                 final ImageButton btnCurvedLine = (ImageButton) toolD.findViewById(R.id.button5);
                 final ImageButton btnText = (ImageButton) toolD.findViewById(R.id.button7);
@@ -670,10 +676,8 @@ public class MyActivity extends SherlockActivity {
         });
 
         view = new SurfaceViewDraw(this);
-        view.setBackgroundColor(Color.WHITE);
         LinearLayout layout = (LinearLayout) findViewById(R.id.forSurfaceViewDraw);
         layout.addView(view);
-
         ModelRoot.getRoot().setBitmap(view.getDrawingCache());
     }
 
@@ -681,7 +685,6 @@ public class MyActivity extends SherlockActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -692,26 +695,35 @@ public class MyActivity extends SherlockActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode,resultCode,data);
 
         if (resultCode == 3) {
             start.dismiss();
         }
 
         if (resultCode == 4) {
-            view.setBackgroundDrawable(Drawable.createFromPath(ModelRoot.getRoot().getFilePath()));
+            Bitmap picture = BitmapFactory.decodeFile(ModelRoot.getRoot().getFilePath());
+            ModelRoot.getRoot().setBitmap(picture);
+            view.postInvalidate();
         }
 
 
-        if (resultCode == 0) {
+        if (resultCode == Activity.RESULT_OK) {
 
-            Bundle extras = data.getExtras();
-            Bitmap photo = (Bitmap) extras.get("data");
-            ModelRoot.getRoot().setBitmap(photo);
-            start.dismiss();
+            try {
+                InputStream stream = getContentResolver().openInputStream(data.getData());
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                Display display = getWindowManager().getDefaultDisplay();
+                bitmap = Bitmap.createScaledBitmap(bitmap, display.getWidth(), display.getHeight(), false);
+                ModelRoot.getRoot().setBitmap(bitmap);
+                stream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            view.postInvalidate();
         }
-
-
-
     }
 
     private void showToastMessage(String msg) {
