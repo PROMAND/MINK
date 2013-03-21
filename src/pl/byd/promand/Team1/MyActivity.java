@@ -719,7 +719,7 @@ public class MyActivity extends SherlockActivity {
             public void onClick(View v) {
                 EditText fileName = (EditText) saveD.findViewById(R.id.fileName);
                 String imageName = fileName.getText().toString();
-                final File file = new File("/mnt/sdcard/Pictures/" + imageName + ".jpg");
+                final File file = new File(getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES).getPath() + imageName + ".jpg");
                 if (file.exists()) {
                     final Dialog check = new Dialog(MyActivity.this);
                     check.setTitle("File with same name exists");
