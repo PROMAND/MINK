@@ -68,6 +68,10 @@ public class MyActivity extends SherlockActivity {
                     public void onClick(View v) {
                         MyActivity.this.onCreate(savedInstanceState);
                         ModelRoot.getRoot().setBitmap(null);
+                        ModelRoot.getRoot().setBackColor("#FFFFF0");
+                        ModelRoot.getRoot().setColor("#000000");
+                        ModelRoot.getRoot().setTool(3);
+                        ModelRoot.getRoot().setWidth("3");
                         start.dismiss();
                     }
                 });
@@ -237,17 +241,6 @@ public class MyActivity extends SherlockActivity {
 
                 });
 
-            /*    btnFiller.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showToastMessage("FILLER has been chosen");
-                        ModelRoot.getRoot().setBackColor(ModelRoot.getRoot().getColor());
-                        ModelRoot.getRoot().setToolI(btnFiller.getDrawable());
-                        toolD.dismiss();
-                    }
-
-
-                });    */
 
                 btnLine.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -259,17 +252,6 @@ public class MyActivity extends SherlockActivity {
                     }
                 });
 
-                btnCurvedLine.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showToastMessage("CURVED LINE has been chosen");
-                        ModelRoot.getRoot().setTool(8);
-                        ModelRoot.getRoot().setToolI(btnCurvedLine.getDrawable());
-                        toolD.dismiss();
-                    }
-
-
-                });
 
                 btnText.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -509,6 +491,7 @@ public class MyActivity extends SherlockActivity {
                                 ModelRoot.getRoot().setBackColor(color);
                                 Toast.makeText(MyActivity.this, "Background color selected", 5000).show();
                                 colorD.dismiss();
+       /******************/     view.postInvalidate();  //*************************************************************
                             } else {
                                 final AlertDialog.Builder alert = new AlertDialog.Builder(MyActivity.this);
                                 alert.setTitle("Error!");
