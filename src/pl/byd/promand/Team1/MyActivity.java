@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.provider.MediaStore;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -92,12 +93,12 @@ public class MyActivity extends SherlockActivity {
                 });
                 break;
             }
-            case R.id.upbutton3: {
-                break;
-            }
             case R.id.upbutton4: {
                 taptoshare();
                 break;
+            }
+            case R.id.upbutton3: {
+                taptosave();
             }
             default: {
                 break;
@@ -135,6 +136,9 @@ public class MyActivity extends SherlockActivity {
             }
         });
         return true;
+    }
+
+    private void saveAsJpg() {
     }
 
     @Override
@@ -704,4 +708,44 @@ public class MyActivity extends SherlockActivity {
 
     }
 
+    public void taptosave() {
+
+        OutputStream fOut = null;
+        /*File strDirectoy = "/";*/
+//        String imgname = null;
+        File file = new File("/mnt/sdcard/Pictures/test");
+        try {
+        fOut = new FileOutputStream(file);
+
+        Bitmap bitmap = view.getDrawingCache();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+        fOut.flush();
+        fOut.close();
+
+
+            MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
+//public void saveAsJpg (File f)
+//{
+//    String fname = f.getAbsolutePath ();
+//    FileOutputStream fos = null;
+//    try
+//    {
+//        fos = new FileOutputStream (f);
+//        Bitmap mBitmap = view.getDrawingCache();
+//        mBitmap.compress (Bitmap.CompressFormat.JPEG, 95, fos);
+//        Toast.makeText (getApplicationContext(), "Saved " + fname, Toast.LENGTH_LONG).show ();
+//    }
+//    catch (Throwable ex)
+//    {
+//        Toast.makeText (getApplicationContext(), "Error: " + ex.getMessage (), Toast.LENGTH_LONG).show ();
+//        ex.printStackTrace ();
+//    }
+//}
 }
