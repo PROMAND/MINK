@@ -46,7 +46,7 @@ public class OpenFileActivity extends SherlockActivity {
                         ModelRoot.getRoot().setFilePath(file.getPath());
                         create(ModelRoot.getRoot().getFilePath());
                     }
-                    if (file.isFile() && file.getPath().endsWith(".jpg")) {
+                    if (file.isFile() && (file.getPath().endsWith(".jpg") || file.getPath().endsWith(".JPG"))) {
                         ModelRoot.getRoot().setFilePath(file.getPath());
                         finish();
                     }

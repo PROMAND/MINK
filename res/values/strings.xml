@@ -33,4 +33,9 @@
     <string name="pen">Pen</string>
     <string name="exit">Exit</string>
     <string name="or">OR</string>
+    <string name="fileName">Enter a file name</string>
+    <string name="okB">OK</string>
+    <string name="question">Do you want to overwrite it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

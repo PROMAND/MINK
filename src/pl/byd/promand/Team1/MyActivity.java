@@ -707,25 +707,88 @@ public class MyActivity extends SherlockActivity {
 
     public void taptosave() {
 
-        OutputStream fOut = null;
-        /*File strDirectoy = "/";*/
-//        String imgname = null;
-        File file = new File("/mnt/sdcard/Pictures/test");
-        try {
-            fOut = new FileOutputStream(file);
+        final Dialog saveD = new Dialog(this);
+        saveD.setTitle("Choose name of file");
+        saveD.setContentView(R.layout.save_dialog);
 
-            Bitmap bitmap = view.getDrawingCache();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
-            fOut.flush();
-            fOut.close();
+        Button okB = (Button) saveD.findViewById(R.id.okB);
+        Button cancelB = (Button) saveD.findViewById(R.id.cancelB3);
 
+        okB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText fileName = (EditText) saveD.findViewById(R.id.fileName);
+                String imageName = fileName.getText().toString();
+                final File file = new File("/mnt/sdcard/Pictures/" + imageName + ".jpg");
+                if (file.exists()) {
+                    final Dialog check = new Dialog(MyActivity.this);
+                    check.setTitle("File with same name exists");
+                    check.setContentView(R.layout.check);
 
-            MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+                    Button y = (Button) check.findViewById(R.id.yes);
+                    Button n = (Button) check.findViewById(R.id.no);
 
+                    y.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            file.delete();
+                            try {
+                                FileOutputStream fOut = new FileOutputStream(file);
+
+                                Bitmap bitmap = view.getDrawingCache();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                                fOut.flush();
+                                fOut.close();
+
+//                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getPath(), imageName, imageName);
+                                Toast.makeText(MyActivity.this, "Your file is saved to " + file.getAbsolutePath(), 5000).show();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            check.dismiss();
+                        }
+                    });
+
+                    n.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            check.dismiss();
+                            taptosave();
+                        }
+                    });
+
+                    check.show();
+                } else {
+                    try {
+                        FileOutputStream fOut = new FileOutputStream(file);
+
+                        Bitmap bitmap = view.getDrawingCache();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        fOut.flush();
+                        fOut.close();
+
+//                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getPath(), imageName, imageName);
+                        Toast.makeText(MyActivity.this, "Your file is saved to " + file.getAbsolutePath(), 5000).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                saveD.dismiss();
+            }
+        });
+
+        cancelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveD.dismiss();
+            }
+        });
+
+        saveD.show();
     }
 }
